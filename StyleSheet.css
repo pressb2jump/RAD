@@ -120,8 +120,11 @@ th
 
 #top10_table table
 {
-    width: 80%;
-
+    width: 150px;
+    border: 1px #000 solid;
+    border-collapse: collapse;
+    border-spacing: 0px;
+    margin: 15px ;
 }
 
 #top10_table td 
