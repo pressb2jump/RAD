@@ -193,9 +193,12 @@ $maxResults = (int)max($results);
         imagepng($chart, "outputimage.png");
         imagedestroy($chart);
         echo "<img src='outputimage.png'><p></p>";
+        
+        /*
+        * Table for colors
+        */
         ?>
-    </div>
-    <div id = 'top10_table'> 
+        <div id = 'top10_table'> 
        <table>
                 <tr><th>COLOR</th><th>TITLE</th></tr>
                 <tr><td style='background-color: red'>
@@ -221,6 +224,8 @@ $maxResults = (int)max($results);
                 
         </table>
      </div>
+    </div>
+    
     </main>
 </div>
 </body>
