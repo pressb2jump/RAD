@@ -23,21 +23,30 @@
  */
 ?>
 <?php 
+//Require database php for sql statements
 require_once 'database.php';
+// Require header page
 require 'header.php';
+//Connect to database
 $db = DB_connect();
+// declare arrays that will be used below
 $results = array();
 $titleArray = array();
+// Uses function from database to get top 10 movies
 $movies_set = Find_Top_movies();
+// returns the array as movie_set objects
 while ($obj = $movies_set->fetch_object()) {
     for ($i=1; $i <=10; $i++) {
+        // add to array with Title as index(Key) and Search_Hits as Value 
         $results[$obj->Title] = $obj->Search_Hits; 
     }
 }
+// gets the top 10 movie titles only
 foreach($results as $key => $value)
 {
     $titleArray[] = $key;
 }
+// get the max search_hits
 $maxResults = (int)max($results);
 ?>
 <!DOCTYPE html>
@@ -47,6 +56,7 @@ $maxResults = (int)max($results);
     <meta name="author" content="Bayley Wise" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!---Style sheets -->
     <link rel="stylesheet" 
     href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="StyleSheet.css" />
