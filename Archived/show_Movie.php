@@ -45,7 +45,6 @@ $movies_set = Find_All_movies();
     <nav class="col-lg-2 bg-info">
         <h2 class="text-center">Page Links</h2>
         <ul class="nav nav-pills nav-stacked">
-            <li><a href="show_Movie.php">Show Movies</a></li>
             <li><a href="search_Movie.php">Search Movies</a></li>
             <li><a href="top_Movies.php">Top 10</a></li>
         </ul> 

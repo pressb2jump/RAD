@@ -25,7 +25,6 @@
 <header>
   <!-- Navbar -->
   <div class="topnav">
-        <a href="show_Movie.php">Show Movies</a>
         <a href="search_Movie.php">Search Movies</a>
         <a href="top_Movies.php">Top 10</a>
   </div>
