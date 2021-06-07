@@ -25,9 +25,11 @@
 <?php
 require 'header.php';
 require_once 'database.php';
-$firstname = $_POST['firstname'];
-$lastname = $_POST['lastname'];
-$email = $_POST['email'];
+$db = DB_connect();
+$user['first_name'] = $_POST['first_name'];
+$user['last_name'] = $_POST['last_name'];
+$user['email'] = $_POST['emailAddress'];
+Insert_user($user);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,7 +41,7 @@ $email = $_POST['email'];
     <link rel="stylesheet" 
     href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="StyleSheet.css" />
-    <title>Search Movies</title>
+    <title>User signup</title>
 </head>
 <body> 
 <div class="row">

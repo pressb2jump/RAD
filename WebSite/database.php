@@ -164,4 +164,32 @@ function Update_Search_hits($title, $rating, $genre, $year)
         exit;
     }
 }
+/**
+ * Insert User query
+ *
+ * @param array $user anything
+ * 
+ * @return bool
+ */
+function Insert_user($user) 
+{
+    global $db;
+    $sql = "INSERT INTO user ";
+    $sql.= "(`first_name`, `last_name`, `email`) ";
+    $sql.= "VALUES (";
+    $sql.= "'" . $user['first_name'] . "',";
+    $sql.= "'" . $user['last_name'] . "' ,";
+    $sql.= "'" . $user['email'] . "' ";
+    $sql.= ")";
+    $result = mysqli_query($db, $sql);
+    // For INSERT statements, $result is true/false
+    if ($result) {
+        return true;
+    } else {
+        // INSERT failed
+        echo mysqli_error($db);
+        db_disconnect($db);
+        exit;
+    }
+}
 ?>
