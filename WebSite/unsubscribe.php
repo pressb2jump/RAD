@@ -1,6 +1,6 @@
 <?php
 /**
- * Add User Page
+ * Unsubscribe Page
  *
  * PHP version 5
  *
@@ -10,7 +10,7 @@
  * the PHP License and are unable to obtain it through the web, please
  * send a note to license@php.net so we can mail you a copy immediately.
  *
- * @category   Add_User
+ * @category   User
  * @package    Project
  * @author     Bayley Wise <M210796@Tafe.wa.edu.au>
  * @copyright  1997-2005 The PHP Group
@@ -24,7 +24,6 @@
 ?>
 <?php
 require 'header.php';
-$user['email'] = $_POST['emailAddress'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -63,6 +62,17 @@ $user['email'] = $_POST['emailAddress'];
             <button type="submit" name="btnSubmit" 
             class="btn btn-default">Unsubscribe</button>
         </form>
+        <?php
+    if (isset($_POST["btnSubmit"])) {
+        $email = $_POST['emailAddress'];
+        $message = $email." would like to unsubscribe from the newsletter service.";
+        $sent =mail("M201796@Tafe.wa.edu.au", "Unsubscribe", $message);
+        // Check, if message sent to your email
+        if($sent){
+            echo "Unsubscribe Successful";
+        }
+    }
+    ?>
     </main>
 </div>
 </body>

@@ -78,7 +78,7 @@ Insert_user($user);
             <button type="submit" name="btnSubmit" 
             class="btn btn-default">Sign Up</button>
         </form>
-        <li><a href="unsubscribe.php">Unsubscribe</a></li>
+        <a href="unsubscribe.php">Unsubscribe</a>
     </main>
 </div>
 </body>
