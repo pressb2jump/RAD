@@ -24,12 +24,7 @@
 ?>
 <?php
 require 'header.php';
-require_once 'database.php';
-$db = DB_connect();
-$user['first_name'] = $_POST['first_name'];
-$user['last_name'] = $_POST['last_name'];
 $user['email'] = $_POST['emailAddress'];
-Insert_user($user);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,7 +36,7 @@ Insert_user($user);
     <link rel="stylesheet" 
     href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="StyleSheet.css" />
-    <title>User signup</title>
+    <title>Unsubscribe</title>
 </head>
 <body> 
 <div class="row">
@@ -55,20 +50,10 @@ Insert_user($user);
     </nav>
        
     <main class="col-lg-10">
-        <h1>User Signup</h1>
+        <h1>User Unsubscribe</h1>
         <form action="<?php echo htmlspecialchars(
             $_SERVER["PHP_SELF"]
         ); ?>" method="post">
-            <div class="form-group">
-                <label for="first_name">First Name:</label>
-                <input type="text" class="form-control" id="first_name" 
-                name="first_name" pattern= "[a-zA-Z\- ']*" required>
-            </div>
-            <div class="form-group">
-                <label for="last_name">Last Name:</label>
-                <input type="text" class="form-control" id="last_name" 
-                name="last_name" pattern= "[a-zA-Z\- ']*" required>
-            </div>
             <div class="form-group">
                 <label for="emailAddress">Email:</label>
                 <input type="text" class="form-control" id="emailAddress" 
@@ -76,9 +61,8 @@ Insert_user($user);
                 pattern="[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*" required>
             </div>
             <button type="submit" name="btnSubmit" 
-            class="btn btn-default">Sign Up</button>
+            class="btn btn-default">Unsubscribe</button>
         </form>
-        <li><a href="unsubscribe.php">Unsubscribe</a></li>
     </main>
 </div>
 </body>
