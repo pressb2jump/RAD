@@ -192,4 +192,34 @@ function Insert_user($user)
         exit;
     }
 }
+
+function Delete_user($user) 
+{
+    global $db;
+    $sql = "DELETE FROM user WHERE user_id = ";
+    $sql.= "(`first_name`, `last_name`, `email`) ";
+    $sql.= "VALUES (";
+    $sql.= "'" . $user['first_name'] . "',";
+    $sql.= "'" . $user['last_name'] . "' ,";
+    $sql.= "'" . $user['email'] . "' ";
+    $sql.= ")";
+    $result = mysqli_query($db, $sql);
+    // For INSERT statements, $result is true/false
+    if ($result) {
+        return true;
+    } else {
+        // INSERT failed
+        echo mysqli_error($db);
+        db_disconnect($db);
+        exit;
+    }
+}
+function Show_user($user)
+{
+    global $db;
+    $sql = "SELECT * FROM user WHERE email LIKE ('%" .$user['email']."%')";
+    $result = mysqli_query($db, $sql);    
+    return $result;
+    
+}
 ?>

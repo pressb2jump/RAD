@@ -21,14 +21,19 @@
  * @since      File available since Release 1.2.0
  * @deprecated File deprecated in Release 2.0.0
  */
+
+require_once 'database.php';
+$db = DB_connect();
+
+//retrieve the id from the base request
+$userID = $_REQUEST['id'];
+
+$sql = "DELETE FROM user WHERE user_id =" . $userID;
+if (mysqli_query($db, $sql) === TRUE) {
+    header('Location: showUsers.php');
+    exit;
+} else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+}
+
 ?>
-<header>
-  <!-- Navbar -->
-  <div class="topnav">
-        <a href="search_Movie.php">Search Movies</a>
-        <a href="top_Movies.php">Top 10</a>
-        <a href="user.php">User Signup</a>
-        <a href="showUsers.php">View All Users</a>
-  </div>
-  <!-- Navbar -->
-</header>

@@ -38,13 +38,14 @@ require 'header.php';
     <title>Unsubscribe</title>
 </head>
 <body> 
-<div class="row">
+<div id="data-body" class="row">
     <nav class="col-lg-2 bg-info">
         <h2 class="text-center">Page Links</h2>
         <ul class="nav nav-pills nav-stacked">
             <li><a href="search_Movie.php">Search Movies</a></li>
             <li><a href="top_Movies.php">Top 10</a></li>
             <li><a href="user.php">User Signup</a></li>
+            <li><a href="showUsers.php">View All Users</a></li>
         </ul> 
     </nav>
        

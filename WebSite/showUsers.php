@@ -29,7 +29,8 @@ $db = DB_connect();
 $user['first_name'] = $_POST['first_name'];
 $user['last_name'] = $_POST['last_name'];
 $user['email'] = $_POST['emailAddress'];
-Insert_user($user);
+$userEmail['email'] = $_POST['email'];
+$result = Show_user($userEmail);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,7 +46,7 @@ Insert_user($user);
 </head>
 <body> 
 <div id="data-body" class="row">
-    <nav class="col-lg-2 bg-info">
+    <nav id="data-nav-bar" class="col-lg-2 bg-info">
         <h2 class="text-center">Page Links</h2>
         <ul class="nav nav-pills nav-stacked">
             <li><a href="search_Movie.php">Search Movies</a></li>
@@ -54,36 +55,57 @@ Insert_user($user);
             <li><a href="showUsers.php">View All Users</a></li>
         </ul> 
     </nav>
-       
     <main class="col-lg-10">
-        <h1>User Signup</h1>
-        <form action="<?php echo htmlspecialchars(
-            $_SERVER["PHP_SELF"]
-        ); ?>" method="post">
-            <div class="form-group">
-                <label for="first_name">First Name:</label>
-                <input type="text" class="form-control" id="first_name" 
-                name="first_name" pattern= "[a-zA-Z\- ']*" required>
-            </div>
-            <div class="form-group">
-                <label for="last_name">Last Name:</label>
-                <input type="text" class="form-control" id="last_name" 
-                name="last_name" pattern= "[a-zA-Z\- ']*" required>
-            </div>
-            <div class="form-group">
-                <label for="emailAddress">Email:</label>
-                <input type="text" class="form-control" id="emailAddress" 
-                name="emailAddress" 
-                pattern="[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*" required>
-            </div>
-            <button type="submit" name="btnSubmit" 
-            class="btn btn-default">Sign Up</button>
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" 
+        method="post">
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="text" class="form-control" id="email" 
+        name="email" pattern= "[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*">
+
+        <button>
+            <type="submit" name="btnSubmit" 
+                class="btn btn-default">Search</button>
         </form>
-        <a href="unsubscribe.php">Unsubscribe</a>
+        <?php
+        if (isset($_POST["btnSubmit"])) {   
+            header('Location: showUsers.php');
+            exit;
+        }
+        else {
+            if ($_POST['email'] =='') {
+                $title = $_POST['email'];
+            }
+        }
+        ?>
+        <table>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Delete User</th>
+            </tr>
+            <?php
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $firstName = $row["first_name"];
+                    $lastName = $row["last_name"];
+                    $email = $row["email"];
+                    $userID = $row["user_id"];
+                    
+                    echo "<tr>
+                            <td>".$firstName."</td>
+                            <td>".$lastName."</td>
+                            <td>".$email."</td>
+                            <td><a href='deleteUser.php?id=$userID'>Delete</a></td>
+                        </tr>";
+                }
+                echo "</table>";
+          ?>
+        </table>
     </main>
 </div>
 </body>
-</html>
+</html> 
 <?php
     require 'footer.php';
 ?>

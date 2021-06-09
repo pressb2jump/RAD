@@ -1,39 +1,7 @@
-﻿#banner /* the heading of the page */ {
-    background-color: #fff;
-    color: #000;
-    border-top: 1px solid #000;
-    border-right: 1px solid #000;
-    border-left: 1px solid #000;
-    height: 39px;
-}
-#menu /* the horizontal menu underneath the banner */ 
-{
-    margin: 0px;
-    padding: 0px;
-    line-height: 100%;
-    background-color: #d0caca;
-    color: #000;
-    top: 50px;
-    border-top: 1px solid #000;
-    border-right: 1px solid #000;
-    border-left: 1px solid #000;
-    height: 25px;
-}
-#form-group
-{
-    width: 80%;
-    padding: 12px 20px;
-    margin: 15px ;
-}
-.form-control
-{
-    width: 60%;
-}
-p, h1 
+﻿p, h1 
 {
     margin: 0px 10px 10px 10px;
 }
-
 h1 
 {
     background-color: transparent; 
@@ -43,15 +11,6 @@ h1
     color: #000000;
     text-align: center;
 }
-
-#banner h1 
-{
-    font-size: 18px;
-    padding: 10px 10px 0px 10px;
-    margin: 0px;
-    text-align: center;
-}
-
 table {
     width: 80%;
     border: 1px #000 solid;
@@ -59,14 +18,6 @@ table {
     border-spacing: 0px;
     margin: 15px ;
     
-}
-
-#result table {
-    width: 150px;
-    border: 1px #000 solid;
-    border-collapse: collapse;
-    border-spacing: 0px;
-    margin: 15px ;
 }
 
 td 
@@ -89,6 +40,12 @@ tr
 th
 {
     text-align: center;
+}
+
+
+.form-control
+{
+    width: 60%;
 }
 .topnav 
 {
@@ -118,6 +75,36 @@ th
     color: white;
 }
 
+
+#data-body{
+    background-image: linear-gradient(to top right, black, red);
+}
+
+#data-nav-bar {
+    
+}
+
+
+#banner h1 
+{
+    font-size: 18px;
+    padding: 10px 10px 0px 10px;
+    margin: 0px;
+    text-align: center;
+}
+
+
+
+#result table {
+    width: 150px;
+    border: 1px #000 solid;
+    border-collapse: collapse;
+    border-spacing: 0px;
+    margin: 15px ;
+}
+
+
+
 #top10_table table
 {
     width: 80%;
@@ -135,4 +122,38 @@ th
     color: #000;
     text-align: center;
     vertical-align: top;  
+}
+
+#footer {
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:60px;
+}
+#banner /* the heading of the page */ {
+    background-color: #fff;
+    color: #000;
+    border-top: 1px solid #000;
+    border-right: 1px solid #000;
+    border-left: 1px solid #000;
+    height: 39px;
+}
+#menu /* the horizontal menu underneath the banner */ 
+{
+    margin: 0px;
+    padding: 0px;
+    line-height: 100%;
+    background-color: #d0caca;
+    color: #000;
+    top: 50px;
+    border-top: 1px solid #000;
+    border-right: 1px solid #000;
+    border-left: 1px solid #000;
+    height: 25px;
+}
+#form-group
+{
+    width: 80%;
+    padding: 12px 20px;
+    margin: 15px ;
 }
