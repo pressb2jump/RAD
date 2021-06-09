@@ -26,10 +26,6 @@
 require 'header.php';
 require_once 'database.php';
 $db = DB_connect();
-$user['first_name'] = $_POST['first_name'];
-$user['last_name'] = $_POST['last_name'];
-$user['email'] = $_POST['emailAddress'];
-Insert_user($user);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -79,6 +75,16 @@ Insert_user($user);
             <button type="submit" name="btnSubmit" 
             class="btn btn-default">Sign Up</button>
         </form>
+        <?php
+    if (isset($_POST["btnSubmit"])) {
+        $user['first_name'] = $_POST['first_name'];
+        $user['last_name'] = $_POST['last_name'];
+        $user['email'] = $_POST['emailAddress'];
+        Insert_user($user);
+        header('Location: unsubscribe.php');
+        exit;
+    }
+    ?>
         <a href="unsubscribe.php">Unsubscribe</a>
     </main>
 </div>

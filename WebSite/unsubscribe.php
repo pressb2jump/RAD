@@ -24,6 +24,16 @@
 ?>
 <?php
 require 'header.php';
+// if (!isset($_SESSION)) {
+//     session_start();
+// }
+
+// if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+//     $_SESSION['postdata'] = $_POST;
+//     unset($_POST);
+//     header("Location: ".$_SERVER['PHP_SELF']);
+//     exit;
+// }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -67,11 +77,9 @@ require 'header.php';
     if (isset($_POST["btnSubmit"])) {
         $email = $_POST['emailAddress'];
         $message = $email." would like to unsubscribe from the newsletter service.";
-        $sent =mail("M201796@Tafe.wa.edu.au", "Unsubscribe", $message);
-        // Check, if message sent to your email
-        if($sent){
-            echo "Unsubscribe Successful";
-        }
+        mail("M201796@Tafe.wa.edu.au", "Unsubscribe", $message);
+        header('Location: unsubscribe.php');
+        exit;
     }
     ?>
     </main>
