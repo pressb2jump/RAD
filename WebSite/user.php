@@ -80,6 +80,7 @@ $db = DB_connect();
         $user['last_name'] = $_POST['last_name'];
         $user['email'] = $_POST['emailAddress'];
         Insert_user($user);
+        header('Location: unsubscribe.php');
         exit;
     }
     ?>
