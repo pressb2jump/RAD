@@ -1,4 +1,7 @@
-﻿p, h1 
+﻿::after {
+    color: #CCC;
+}
+p, h1 
 {
     margin: 0px 10px 10px 10px;
 }
@@ -8,8 +11,14 @@ h1
     font-size: 32px;
     font-weight: bold;
     padding-top: 10px;
-    color: #000000;
+    color: #ffffff;
     text-align: center;
+}
+h2 {
+    color: white;
+}
+a {
+    color: white;
 }
 table {
     width: 80%;
@@ -40,17 +49,30 @@ tr
 th
 {
     text-align: center;
+    background-color: #CCC;
 }
 
+label {
+    color: white;
+}
 
+header {
+    min-width: 100%;
+    /* position:fixed; */
+}
+
+/* body {
+    min-width: 100%;
+} */
 .form-control
 {
     width: 60%;
 }
 .topnav 
 {
-    overflow: hidden;
+    /* overflow: hidden; */
     background-color: #333;
+    min-width: 100%;
 }
   
 .topnav a 
@@ -78,10 +100,8 @@ th
 
 #data-body{
     background-image: linear-gradient(to top right, black, red);
-}
-
-#data-nav-bar {
-    
+    min-height: 100%;
+    min-width: 100%;
 }
 
 
@@ -124,11 +144,16 @@ th
     vertical-align: top;  
 }
 
-#footer {
-    position:absolute;
-    bottom:0;
+#data-footer {
+    position:fixed;
+    bottom:0px;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
     width:100%;
-    height:60px;
+    height:20px;
+    background-color: #333;
+    color: white;
 }
 #banner /* the heading of the page */ {
     background-color: #fff;
@@ -156,4 +181,13 @@ th
     width: 80%;
     padding: 12px 20px;
     margin: 15px ;
+}
+
+#data-chart {
+    position: center;
+    left: 30px;
+}
+
+#data-nav-bar {
+    background:  #333;
 }

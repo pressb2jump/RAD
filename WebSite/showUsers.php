@@ -51,8 +51,9 @@ $result = Show_user($userEmail);
         <ul class="nav nav-pills nav-stacked">
             <li><a href="search_Movie.php">Search Movies</a></li>
             <li><a href="top_Movies.php">Top 10</a></li>
-            <li><a href="user.php">User Signup</a></li>
+            <li><a href="userSignUp.php">User Signup</a></li>
             <li><a href="showUsers.php">View All Users</a></li>
+            <li><a href="adminLogIn.php">Administrator Section</a></li>
         </ul> 
     </nav>
     <main class="col-lg-10">
@@ -66,6 +67,9 @@ $result = Show_user($userEmail);
         <button>
             <type="submit" name="btnSubmit" 
                 class="btn btn-default">Search</button>
+        <button>
+            <type="submit" name="btnSendEmail" 
+                class="btn btn-default">Send All Email</button>
         </form>
         <?php
         if (isset($_POST["btnSubmit"])) {   

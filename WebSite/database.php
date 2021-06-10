@@ -222,4 +222,14 @@ function Show_user($user)
     return $result;
     
 }
+
+function Get_Admin()
+{
+    global $db; // must be on the top
+    $sql = "SELECT * FROM `admin`";
+    //echo $sql;
+    $result = mysqli_query($db, $sql);
+    return $result;
+    
+}
 ?>

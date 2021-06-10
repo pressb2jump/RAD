@@ -1,6 +1,6 @@
 <?php
 /**
- * Unsubscribe Page
+ * Add User Page
  *
  * PHP version 5
  *
@@ -10,7 +10,7 @@
  * the PHP License and are unable to obtain it through the web, please
  * send a note to license@php.net so we can mail you a copy immediately.
  *
- * @category   User
+ * @category   Add_User
  * @package    Project
  * @author     Bayley Wise <M210796@Tafe.wa.edu.au>
  * @copyright  1997-2005 The PHP Group
@@ -24,16 +24,8 @@
 ?>
 <?php
 require 'header.php';
-// if (!isset($_SESSION)) {
-//     session_start();
-// }
-
-// if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-//     $_SESSION['postdata'] = $_POST;
-//     unset($_POST);
-//     header("Location: ".$_SERVER['PHP_SELF']);
-//     exit;
-// }
+require_once 'database.php';
+$db = DB_connect();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,7 +37,7 @@ require 'header.php';
     <link rel="stylesheet" 
     href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="StyleSheet.css" />
-    <title>Unsubscribe</title>
+    <title>User signup</title>
 </head>
 <body> 
 <div id="data-body" class="row">
@@ -61,10 +53,20 @@ require 'header.php';
     </nav>
        
     <main class="col-lg-10">
-        <h1>User Unsubscribe</h1>
+        <h1>User Signup</h1>
         <form action="<?php echo htmlspecialchars(
             $_SERVER["PHP_SELF"]
         ); ?>" method="post">
+            <div class="form-group">
+                <label for="first_name">First Name:</label>
+                <input type="text" class="form-control" id="first_name" 
+                name="first_name" pattern= "[a-zA-Z\- ']*" required>
+            </div>
+            <div class="form-group">
+                <label for="last_name">Last Name:</label>
+                <input type="text" class="form-control" id="last_name" 
+                name="last_name" pattern= "[a-zA-Z\- ']*" required>
+            </div>
             <div class="form-group">
                 <label for="emailAddress">Email:</label>
                 <input type="text" class="form-control" id="emailAddress" 
@@ -72,17 +74,19 @@ require 'header.php';
                 pattern="[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*" required>
             </div>
             <button type="submit" name="btnSubmit" 
-            class="btn btn-default">Unsubscribe</button>
+            class="btn btn-default">Sign Up</button>
         </form>
         <?php
     if (isset($_POST["btnSubmit"])) {
-        $email = $_POST['emailAddress'];
-        $message = $email." would like to unsubscribe from the newsletter service.";
-        mail("M201796@Tafe.wa.edu.au", "Unsubscribe", $message);
-        header('Location: unsubscribe.php');
+        $user['first_name'] = $_POST['first_name'];
+        $user['last_name'] = $_POST['last_name'];
+        $user['email'] = $_POST['emailAddress'];
+        Insert_user($user);
+        header('Location: showUsers.php');
         exit;
     }
     ?>
+        <a href="unsubscribe.php">Unsubscribe</a>
     </main>
 </div>
 </body>

@@ -26,6 +26,7 @@
 require 'header.php';
 require_once 'database.php';
 $db = DB_connect();
+$result = Get_Admin();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,51 +42,57 @@ $db = DB_connect();
 </head>
 <body> 
 <div id="data-body" class="row">
-    <nav class="col-lg-2 bg-info">
+    <nav id="data-nav-bar" class="col-lg-2 bg-info">
         <h2 class="text-center">Page Links</h2>
         <ul class="nav nav-pills nav-stacked">
             <li><a href="search_Movie.php">Search Movies</a></li>
             <li><a href="top_Movies.php">Top 10</a></li>
-            <li><a href="user.php">User Signup</a></li>
+            <li><a href="userSignUp.php">User Signup</a></li>
             <li><a href="showUsers.php">View All Users</a></li>
+            <li><a href="adminLogIn.php">Administrator Section</a></li>
         </ul> 
     </nav>
        
     <main class="col-lg-10">
-        <h1>User Signup</h1>
+        <h1>Log-In</h1>
         <form action="<?php echo htmlspecialchars(
             $_SERVER["PHP_SELF"]
         ); ?>" method="post">
             <div class="form-group">
-                <label for="first_name">First Name:</label>
-                <input type="text" class="form-control" id="first_name" 
-                name="first_name" pattern= "[a-zA-Z\- ']*" required>
+                <label for="user_name">Username:</label>
+                <input type="text" class="form-control" id="user_name" 
+                name="user_name" pattern= "[a-zA-Z\- ']*" required>
             </div>
             <div class="form-group">
-                <label for="last_name">Last Name:</label>
-                <input type="text" class="form-control" id="last_name" 
-                name="last_name" pattern= "[a-zA-Z\- ']*" required>
-            </div>
-            <div class="form-group">
-                <label for="emailAddress">Email:</label>
-                <input type="text" class="form-control" id="emailAddress" 
-                name="emailAddress" 
-                pattern="[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*" required>
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" id="password" 
+                name="password" pattern= "[a-zA-Z\- ']*" required>
             </div>
             <button type="submit" name="btnSubmit" 
-            class="btn btn-default">Sign Up</button>
+            class="btn btn-default">Log-In</button>
         </form>
         <?php
     if (isset($_POST["btnSubmit"])) {
-        $user['first_name'] = $_POST['first_name'];
-        $user['last_name'] = $_POST['last_name'];
-        $user['email'] = $_POST['emailAddress'];
-        Insert_user($user);
-        header('Location: unsubscribe.php');
-        exit;
+        $login['user_name'] = $_POST['user_name'];
+        $login['password'] = $_POST['password'];
+        
+        while ($row = mysqli_fetch_assoc($result)) {
+            $userName = $row["username"];
+            $password = $row["password"];
+
+            if(strcmp($userName, $login['user_name']) == 0){
+                if(strcmp($password, $login['password']) == 0) {
+                    header('Location: showUsers.php');
+                    exit;
+                } else {
+                    echo "<h1>Username OR Password Incorrect.</h1>";
+                }
+            } else {
+                echo "<h1>Username OR Password Incorrect.</h1>";
+            }
+        }
     }
     ?>
-        <a href="unsubscribe.php">Unsubscribe</a>
     </main>
 </div>
 </body>
