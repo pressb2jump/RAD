@@ -66,7 +66,7 @@ Update_Search_hits($title, $rating, $genre, $year);
         <h2 class="text-center">Page Links</h2>
         <ul class="nav nav-pills nav-stacked">
             <li><a href="search_Movie.php">Search Movies</a></li>
-            <li><a href="top_Movies.php">Top 10</a></li>
+            <li><a href="top_Searched.php">Top 10 Searched Movies</a></li>
             <li><a href="userSignUp.php">User Signup</a></li>
             <li><a href="showUsers.php">View All Users</a></li>
             <li><a href="adminLogIn.php">Administrator Section</a></li>

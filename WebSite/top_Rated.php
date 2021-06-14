@@ -1,6 +1,6 @@
 <?php
 /**
- * Add User Page
+ * Top 10 Movies Rated
  *
  * PHP version 5
  *
@@ -10,7 +10,7 @@
  * the PHP License and are unable to obtain it through the web, please
  * send a note to license@php.net so we can mail you a copy immediately.
  *
- * @category   Add_User
+ * @category   Top_Rated
  * @package    Project
  * @author     Bayley Wise <M210796@Tafe.wa.edu.au>
  * @copyright  1997-2005 The PHP Group
@@ -22,11 +22,22 @@
  * @deprecated File deprecated in Release 2.0.0
  */
 ?>
-<?php
-require 'header.php';
+<?php 
+//Require database php for sql statements
 require_once 'database.php';
+// Require header page
+require 'header.php';
+//Connect to database
 $db = DB_connect();
-$result = Get_Admin();
+// declare arrays that will be used below
+$results = array();
+// Uses function from database to get top 10 movies
+$movies_set = Find_Top_movies();
+// returns the array as movie_set objects
+while ($movies = mysqli_fetch_assoc($movies_set)) {
+        // add to array with Title as index(Key) and Search_Hits as Value 
+        $results[] = array("label" => $movies['Title'], "y" => $movies['Search_Hits']);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,12 +46,32 @@ $result = Get_Admin();
     <meta name="author" content="Bayley Wise" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!---Style sheets -->
     <link rel="stylesheet" 
     href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="StyleSheet.css" />
-    <title>User signup</title>
+    <title>Top 10</title>
+    <script>
+    window.onload = function () {
+ 
+    var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	theme: "light2", // "light1", "light2", "dark1", "dark2"
+	title: {
+		text: "Top 10 Searched Movies"
+	},
+	axisY: {
+		title: "Number of Searches"
+	},
+	data: [{
+		type: "column",
+		dataPoints: <?php echo json_encode($results, JSON_NUMERIC_CHECK); ?>
+	}]
+    });
+    chart.render(); }
+    </script> 
 </head>
-<body> 
+<body>
 <div id="data-body" class="row">
     <nav id="data-nav-bar" class="col-lg-2 bg-info">
         <h2 class="text-center">Page Links</h2>
@@ -52,47 +83,12 @@ $result = Get_Admin();
             <li><a href="adminLogIn.php">Administrator Section</a></li>
         </ul> 
     </nav>
-       
-    <main class="col-lg-10">
-        <h1>Log-In</h1>
-        <form action="<?php echo htmlspecialchars(
-            $_SERVER["PHP_SELF"]
-        ); ?>" method="post">
-            <div class="form-group">
-                <label for="user_name">Username:</label>
-                <input type="text" class="form-control" id="user_name" 
-                name="user_name" pattern= "[a-zA-Z\- ']*" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" class="form-control" id="password" 
-                name="password" pattern= "[a-zA-Z\- ']*" required>
-            </div>
-            <button type="submit" name="btnSubmit" 
-            class="btn btn-default">Log-In</button>
-        </form>
-        <?php
-    if (isset($_POST["btnSubmit"])) {
-        $login['user_name'] = $_POST['user_name'];
-        $login['password'] = $_POST['password'];
-        
-        while ($row = mysqli_fetch_assoc($result)) {
-            $userName = $row["username"];
-            $password = $row["password"];
-
-            if(strcmp($userName, $login['user_name']) == 0){
-                if(strcmp($password, $login['password']) == 0) {
-                    header('Location: showUsers.php');
-                    exit;
-                } else {
-                    echo "<h1>Username OR Password Incorrect.</h1>";
-                }
-            } else {
-                echo "<h1>Username OR Password Incorrect.</h1>";
-            }
-        }
-    }
-    ?>
+      
+    <main class="col-lg-20">
+        <h1>Top 10 most Searched Movies</h1>
+        <div id="chartContainer" style="height: 370px; width: 80%;"></div>
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    </div>
     </main>
 </div>
 </body>
