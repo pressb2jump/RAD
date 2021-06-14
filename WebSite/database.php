@@ -175,11 +175,13 @@ function Insert_user($user)
 {
     global $db;
     $sql = "INSERT INTO user ";
-    $sql.= "(`first_name`, `last_name`, `email`) ";
+    $sql.= "(`first_name`, `last_name`, `email`, `news_letter`, `news_blast`) ";
     $sql.= "VALUES (";
     $sql.= "'" . $user['first_name'] . "',";
     $sql.= "'" . $user['last_name'] . "' ,";
-    $sql.= "'" . $user['email'] . "' ";
+    $sql.= "'" . $user['email'] . "' ,";
+    $sql.= "'" . $user['news_letter'] . "' ,";
+    $sql.= "'" . $user['news_blast'] . "' ";
     $sql.= ")";
     $result = mysqli_query($db, $sql);
     // For INSERT statements, $result is true/false
@@ -231,5 +233,34 @@ function Get_Admin()
     $result = mysqli_query($db, $sql);
     return $result;
     
+}
+
+function User_Check()
+{
+    global $db;
+    $sql = "SELECT `email` FROM user";
+    $result = mysqli_query($db, $sql);    
+    return $result;    
+}
+
+function Update_user($user) 
+{
+    global $db;
+    $sql = "UPDATE `user` SET ";
+    $sql.= " `first_name`= '" . $user['first_name'] . "',";
+    $sql.= " `last_name`= '" . $user['last_name'] . "' ,";
+    $sql.= " `news_letter`= '" . $user['news_letter'] . "' ,";
+    $sql.= " `news_blast`= '" . $user['news_blast'] . "' ";
+    $sql.= " WHERE `email` ='" . $user['email'] . "' ";
+    $result = mysqli_query($db, $sql);
+    // For INSERT statements, $result is true/false
+    if ($result) {
+        return true;
+    } else {
+        // INSERT failed
+        echo mysqli_error($db);
+        db_disconnect($db);
+        exit;
+    }
 }
 ?>

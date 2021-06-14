@@ -26,6 +26,8 @@
 require 'header.php';
 require_once 'database.php';
 $db = DB_connect();
+$emailCheck = User_Check();
+(bool)$dupe = False;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -73,6 +75,16 @@ $db = DB_connect();
                 name="emailAddress" 
                 pattern="[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*" required>
             </div>
+            <div class="form-checkbox">
+                <label for="news_letter">Signup for Monthly Newsletter:</label>
+                <input type="checkbox" class="form-checkbox" id="news_letter" 
+                name="news_letter" value="1">
+            </div>
+            <div class="form-checkbox">
+                <label for="news_blast">Signup for News Blasts:</label>
+                <input type="checkbox" class="form-checkbox" id="news_blast" 
+                name="news_blast" value="1">
+            </div>
             <button type="submit" name="btnSubmit" 
             class="btn btn-default">Sign Up</button>
         </form>
@@ -81,9 +93,23 @@ $db = DB_connect();
         $user['first_name'] = $_POST['first_name'];
         $user['last_name'] = $_POST['last_name'];
         $user['email'] = $_POST['emailAddress'];
-        Insert_user($user);
-        header('Location: showUsers.php');
-        exit;
+        $user['news_letter'] = $_POST['news_letter'];
+        $user['news_blast'] = $_POST['news_blast'];
+        while ($emails = mysqli_fetch_assoc($emailCheck)) { 
+            if (strcmp($emails['email'],$_POST['emailAddress'])==0){
+                (bool)$dupe = True;
+            }
+        }
+        if ((bool)$dupe == True){
+            Update_user($user);
+            header('Location: showUsers.php');
+            exit;
+        }
+        else{
+            Insert_user($user);
+            header('Location: showUsers.php');
+            exit;
+        }    
     }
     ?>
         <a href="unsubscribe.php">Unsubscribe</a>
