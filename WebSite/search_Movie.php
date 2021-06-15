@@ -133,8 +133,8 @@ Update_Search_hits($title, $rating, $genre, $year);
         <th>Title</th>
         <th>Studio</th>
         <th>Status</th>
-        <th>Sound</th>
-        <th>Versions</th>
+        <!-- <th>Sound</th> -->
+        <!-- <th>Versions</th> -->
         <th>Retail Price</th>
         <th>Rating</th>
         <th>Year</th>
@@ -145,9 +145,9 @@ Update_Search_hits($title, $rating, $genre, $year);
           <td><?php echo $movies['Title']; ?></td>
           <td><?php echo $movies['Studio']; ?></td>
           <td><?php echo $movies['Status']; ?></td>
-          <td><?php echo $movies['Sound']; ?></td>
-          <td><?php echo $movies['Versions']; ?></td>
-          <td><?php echo $movies['RecRetPrice']; ?></td>
+          <!-- <td><?php //echo $movies['Sound']; ?></td> -->
+          <!-- <td><?php //echo $movies['Versions']; ?></td> -->
+          <td><?php echo "$".$movies['RecRetPrice']; ?></td>
           <td><?php echo $movies['Rating']; ?></td>
           <td><?php echo $movies['Year']; ?></td>
           <td><?php echo $movies['Genre']; ?></td>
