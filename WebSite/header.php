@@ -27,6 +27,7 @@
   <div class="topnav">
         <a href="search_Movie.php">Search Movies</a>
         <a href="top_Searched.php">Top 10 Searched</a>
+        <a href="top_Rated.php">Top 10 Rated Movies</a>
         <a href="userSignUp.php">User Signup</a>
         <a href="showUsers.php">View All Users</a>
   </div>
