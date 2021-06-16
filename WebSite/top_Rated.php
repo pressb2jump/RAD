@@ -31,12 +31,40 @@ require 'header.php';
 $db = DB_connect();
 // declare arrays that will be used below
 $results = array();
-// Uses function from database to get top 10 movies
-$movies_set = Find_Top_movies();
-// returns the array as movie_set objects
-while ($movies = mysqli_fetch_assoc($movies_set)) {
-        // add to array with Title as index(Key) and Search_Hits as Value 
-        $results[] = array("label" => $movies['Title'], "y" => $movies['Search_Hits']);
+$current_results = array();
+$last_results = array();
+// Uses function from database to get top 10 rated movies
+$current = Current_Top_rated();
+$last = Compare_Last_rated();
+//gets current top 10 rated from movies table
+while ($currentID = mysqli_fetch_assoc($current)) {
+    $current_results[] = $currentID['ID'];
+}
+//print_r($current_results);
+//gets last row of rating table
+while ($lastrow = mysqli_fetch_assoc($last)) {
+    $last_results = array($lastrow['1st']
+    , $lastrow['2nd']
+    , $lastrow['3rd']
+    , $lastrow['4th']
+    , $lastrow['5th']
+    , $lastrow['6th']
+    , $lastrow['7th']
+    , $lastrow['8th']
+    , $lastrow['9th']
+    , $lastrow['10th']);
+}
+//print_r($last_results);
+//compare 2 arrays and do an update if different
+if (array_diff($current_results,$last_results) != null) //different
+{
+    print_r(array_diff($current_results,$last_results));
+    Insert_New_top10($current_results);
+    echo "Updated";
+}
+else //same
+{
+    echo "same";
 }
 ?>
 <!DOCTYPE html>
@@ -50,10 +78,47 @@ while ($movies = mysqli_fetch_assoc($movies_set)) {
     <link rel="stylesheet" 
     href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="StyleSheet.css" />
-    <title>Top 10</title>
+    <title>Top 10 Rated</title>
+     
+</head>
+<body>
+<div id="data-body" class="row">
+    <nav id="data-nav-bar" class="col-lg-2 bg-info">
+        <h2 class="text-center">Page Links</h2>
+        <ul class="nav nav-pills nav-stacked">
+            <li><a href="search_Movie.php">Search Movies</a></li>
+            <li><a href="top_Searched.php">Top 10 Searched Movies</a></li>
+            <li><a href="userSignUp.php">User Signup</a></li>
+            <li><a href="showUsers.php">View All Users</a></li>
+            <li><a href="adminLogIn.php">Administrator Section</a></li>
+        </ul> 
+    </nav>  
+    <main class="col-lg-20">
+        <h1>Top 10 most Searched Movies</h1>
+        <div class="form-group">
+                <label for="genre">Genre:</label>
+                <select name="genre" id="genre">
+                <option selected = "">
+                <?php
+                while ($row = mysqli_fetch_array($genres_set)) {
+                    echo("<option value='".$andGenre.$row['Genre'].$closeBracket."'>
+                    ".$row['Genre']."</option>");
+                }?>
+                </select>
+            </div>
+        <div id="chartContainer" style="height: 370px; width: 80%;"></div>
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    </div>
+    </main>
+</div>
+</body>
+</html>
+<?php
+    require 'footer.php';
+    function build_chart($results)
+    {?>
     <script>
     window.onload = function () {
- 
     var chart = new CanvasJS.Chart("chartContainer", {
 	animationEnabled: true,
 	theme: "light2", // "light1", "light2", "dark1", "dark2"
@@ -69,30 +134,6 @@ while ($movies = mysqli_fetch_assoc($movies_set)) {
 	}]
     });
     chart.render(); }
-    </script> 
-</head>
-<body>
-<div id="data-body" class="row">
-    <nav id="data-nav-bar" class="col-lg-2 bg-info">
-        <h2 class="text-center">Page Links</h2>
-        <ul class="nav nav-pills nav-stacked">
-            <li><a href="search_Movie.php">Search Movies</a></li>
-            <li><a href="top_Searched.php">Top 10 Searched Movies</a></li>
-            <li><a href="userSignUp.php">User Signup</a></li>
-            <li><a href="showUsers.php">View All Users</a></li>
-            <li><a href="adminLogIn.php">Administrator Section</a></li>
-        </ul> 
-    </nav>
-      
-    <main class="col-lg-20">
-        <h1>Top 10 most Searched Movies</h1>
-        <div id="chartContainer" style="height: 370px; width: 80%;"></div>
-        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-    </div>
-    </main>
-</div>
-</body>
-</html>
-<?php
-    require 'footer.php';
+    </script>
+    <?php }
 ?>
