@@ -36,6 +36,7 @@ $last_results = array();
 // Uses function from database to get top 10 rated movies
 $current = Current_Top_rated();
 $last = Compare_Last_rated();
+$all_top_rated = All_Top_rated();
 //gets current top 10 rated from movies table
 while ($currentID = mysqli_fetch_assoc($current)) {
     $current_results[] = $currentID['ID'];
@@ -58,13 +59,13 @@ while ($lastrow = mysqli_fetch_assoc($last)) {
 //compare 2 arrays and do an update if different
 if (array_diff($current_results,$last_results) != null) //different
 {
-    print_r(array_diff($current_results,$last_results));
+    //print_r(array_diff($current_results,$last_results));
     Insert_New_top10($current_results);
-    echo "Updated";
+    //echo "Updated";
 }
 else //same
 {
-    echo "same";
+    //echo "same";
 }
 ?>
 <!DOCTYPE html>
@@ -94,18 +95,83 @@ else //same
         </ul> 
     </nav>  
     <main class="col-lg-20">
-        <h1>Top 10 most Searched Movies</h1>
+        <h1>Top 10 Rated Movies</h1>
+        <form action="<?php echo htmlspecialchars(
+            $_SERVER["PHP_SELF"]
+        ); 
+?>" method="post">
         <div class="form-group">
-                <label for="genre">Genre:</label>
-                <select name="genre" id="genre">
-                <option selected = "">
+                <label for="selection">Date of Ratings:</label>
+                <select onChange= "this.form.submit()" name="selection" id="selection">
+                <option  <?php ?>>
                 <?php
-                while ($row = mysqli_fetch_array($genres_set)) {
-                    echo("<option value='".$andGenre.$row['Genre'].$closeBracket."'>
-                    ".$row['Genre']."</option>");
+                while ($row = mysqli_fetch_array($all_top_rated)) {
+                    echo("<option value='".$row['rating_id']."|".$row['date']."'>
+                    ".$row['date']." </option>");
                 }?>
                 </select>
+                <script type="text/javascript">
+                    document.getElementById('selection').value = "<?php echo $_GET['selection'];?>";
+                </script>
             </div>
+        </form>
+        <?php
+        if (isset($_POST['selection']))
+        {
+            $value = $_POST['selection'];
+            //echo $value;
+            $value_explode = explode('|', $value);
+            $id = $value_explode[0];
+            $date = $value_explode[1];
+            //echo $id;
+            getResults($id, $date);
+        }
+        function getResults($id, $date)
+        {
+            $row = Top_Rated_info($id);
+            // unset($results);
+            // $results = array();
+            while ($movies = mysqli_fetch_assoc($row)) {
+                // add to array with Title as index(Key) and Search_Hits as Value 
+                $results[] = array("label" => $movies['Title'], "y" => $movies['Rating_Average']);
+            }
+            //print_r($results);
+            build_chart($results, $date);
+        }
+
+        function build_chart($results, $date)
+        {?>
+        <script>
+        window.onload = function () {
+        var chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+        theme: "light2", // "light1", "light2", "dark1", "dark2"
+        title: {
+            text: "Top 10 rated movies"
+        },
+        subtitles:[
+		{
+			text: "<?php echo $date; ?>"
+			//Uncomment properties below to see how they behave
+			//fontColor: "red",
+			//fontSize: 30
+		}
+		],
+        axisY: {
+            title: "Rating Average"
+        },
+        data: [{
+            //legendMarkerType: "square",
+            type: "column",
+            //showInLegend: true,
+            dataPoints:<?php echo json_encode($results, JSON_NUMERIC_CHECK); ?>
+            
+        }]
+        });
+        chart.render(); }
+        </script>
+        <?php }
+    ?>
         <div id="chartContainer" style="height: 370px; width: 80%;"></div>
         <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
     </div>
@@ -115,25 +181,4 @@ else //same
 </html>
 <?php
     require 'footer.php';
-    function build_chart($results)
-    {?>
-    <script>
-    window.onload = function () {
-    var chart = new CanvasJS.Chart("chartContainer", {
-	animationEnabled: true,
-	theme: "light2", // "light1", "light2", "dark1", "dark2"
-	title: {
-		text: "Top 10 Searched Movies"
-	},
-	axisY: {
-		title: "Number of Searches"
-	},
-	data: [{
-		type: "column",
-		dataPoints: <?php echo json_encode($results, JSON_NUMERIC_CHECK); ?>
-	}]
-    });
-    chart.render(); }
-    </script>
-    <?php }
 ?>
