@@ -67,7 +67,6 @@ Update_Search_hits($title, $rating, $genre, $year);
         <ul class="nav nav-pills nav-stacked">
             <li><a href="search_Movie.php">Search Movies</a></li>
             <li><a href="top_Searched.php">Top 10 Searched Movies</a></li>
-            <li><a href="top_Rated.php">Top 10 Rated Movies</a></li>
             <li><a href="userSignUp.php">User Signup</a></li>
             <li><a href="showUsers.php">View All Users</a></li>
             <li><a href="adminLogIn.php">Administrator Section</a></li>
@@ -131,28 +130,29 @@ Update_Search_hits($title, $rating, $genre, $year);
         ?>
         <table>
             <tr>
-        <th>Title</th>
-        <th>Studio</th>
-        <th>Status</th>
-        <!-- <th>Sound</th> -->
-        <!-- <th>Versions</th> -->
-        <th>Retail Price</th>
-        <th>Rating</th>
-        <th>Year</th>
-        <th>Genre</th>
-        </tr>
-        <?php while ($movies = mysqli_fetch_assoc($movies_set)) { ?>
-        <tr>
-          <td><?php echo $movies['Title']; ?></td>
-          <td><?php echo $movies['Studio']; ?></td>
-          <td><?php echo $movies['Status']; ?></td>
-          <!-- <td><?php //echo $movies['Sound']; ?></td> -->
-          <!-- <td><?php //echo $movies['Versions']; ?></td> -->
-          <td><?php echo "$".$movies['RecRetPrice']; ?></td>
-          <td><?php echo $movies['Rating']; ?></td>
-          <td><?php echo $movies['Year']; ?></td>
-          <td><?php echo $movies['Genre']; ?></td>
-          </tr>
+                <th>Title</th>
+                <th>Studio</th>
+                <th>Status</th>
+                <th>Retail Price</th>
+                <th>Rating</th>
+                <th>Year</th>
+                <th>Genre</th>
+                <th>More</th>
+            </tr>
+        <?php while ($movies = mysqli_fetch_assoc($movies_set)) { 
+            $movieID = $_POST['ID'];
+
+            ?>
+            <tr>
+                <td><?php echo $movies['Title']; ?></td>
+                <td><?php echo $movies['Studio']; ?></td>
+                <td><?php echo $movies['Status']; ?></td>
+                <td><?php echo "$".$movies['RecRetPrice']; ?></td>
+                <td><?php echo $movies['Rating']; ?></td>
+                <td><?php echo $movies['Year']; ?></td>
+                <td><?php echo $movies['Genre']; ?></td>
+                <td><a href='moreInfo.php?id=<?php echo $movies['ID'] ?>'>More</a></td>
+            </tr>
         <?php } ?>
     </table>
     </main>

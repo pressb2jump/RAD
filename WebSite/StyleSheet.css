@@ -99,7 +99,7 @@ header {
 
 
 #data-body{
-    background-image: linear-gradient(to top right, black, red);
+    background-image: linear-gradient(to top right, red, black);
     min-height: 100%;
     min-width: 100%;
 }

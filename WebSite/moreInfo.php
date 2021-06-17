@@ -1,6 +1,6 @@
 <?php
 /**
- * Add User Page
+ * Movie Search Page
  *
  * PHP version 5
  *
@@ -23,11 +23,24 @@
  */
 ?>
 <?php
+
 require 'header.php';
 require_once 'database.php';
+
 $db = DB_connect();
-$result = Get_Admin();
+$genres_set = Find_genres();
+$ratings_set = Find_ratings();
+$years_set = Find_years();
+
+$genre = $_POST['genre'];
+$year = $_POST['year'];
+$rating = $_POST['rating'];
+$movieID = $_REQUEST['id'];
+
+$movies_set =  Movie_Details($movieID);
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,7 +51,7 @@ $result = Get_Admin();
     <link rel="stylesheet" 
     href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="StyleSheet.css" />
-    <title>User signup</title>
+    <title>Search Movies</title>
 </head>
 <body> 
 <div id="data-body" class="row">
@@ -54,45 +67,38 @@ $result = Get_Admin();
     </nav>
        
     <main class="col-lg-10">
-        <h1>Log-In</h1>
-        <form action="<?php echo htmlspecialchars(
-            $_SERVER["PHP_SELF"]
-        ); ?>" method="post">
-            <div class="form-group">
-                <label for="user_name">Username:</label>
-                <input type="text" class="form-control" id="user_name" 
-                name="user_name" pattern= "[a-zA-Z\- ']*" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" class="form-control" id="password" 
-                name="password" pattern= "[a-zA-Z\- ']*" required>
-            </div>
-            <button type="submit" name="btnSubmit" 
-            class="btn btn-default">Log-In</button>
-        </form>
-        <?php
-    if (isset($_POST["btnSubmit"])) {
-        $login['user_name'] = $_POST['user_name'];
-        $login['password'] = $_POST['password'];
-        
-        while ($row = mysqli_fetch_assoc($result)) {
-            $userName = $row["username"];
-            $password = $row["password"];
-
-            if(strcmp($userName, $login['user_name']) == 0){
-                if(strcmp($password, $login['password']) == 0) {
-                    header('Location: showUsers.php');
-                    exit;
-                } else {
-                    echo "<h1>Username OR Password Incorrect.</h1>";
-                }
-            } else {
-                echo "<h1>Username OR Password Incorrect.</h1>";
-            }
-        }
-    }
-    ?>
+        <h1><?php echo $movies['Title']; ?></h1>
+        <table>
+        <?php echo "
+            <tr>
+                <th>Title</th>
+                <th>Studio</th>
+                <th>Status</th>
+                <th>Sound</th>
+                <th>Versions</th>
+                <th>Retail Price</th>
+                <th>Rating</th>
+                <th>Year</th>
+                <th>Genre</th>
+            </tr>
+            ";
+            while ($movies = mysqli_fetch_assoc($movies_set)) { 
+                echo "
+                
+            <tr>
+                <td>".$movies['Title']."</td>
+                <td>".$movies['Studio']."</td>
+                <td>".$movies['Status']."</td>
+                <td>".$movies['Sound']."</td> 
+                <td>".$movies['Versions']."</td>
+                <td>$".$movies['RecRetPrice']."</td>
+                <td>".$movies['Rating']."</td>
+                <td>".$movies['Year']."</td>
+                <td>".$movies['Genre']."</td>
+            </tr>";
+            } 
+            ?>
+    </table>
     </main>
 </div>
 </body>
