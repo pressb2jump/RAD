@@ -277,4 +277,76 @@ function Movie_Details($movieID)
 function Find_Title(){
     
 }
+
+function Top_Rated_info($id) 
+{
+    global $db; // must be on the top
+    $sql = "SELECT m.* FROM `ratings` r "; 
+    $sql.= "INNER JOIN movies m ON m.ID = r.1st ";
+    $sql.= "OR m.ID = r.2nd OR m.ID = r.3rd "; 
+    $sql.= "OR m.ID = r.4th OR m.ID = r.5th ";
+    $sql.= "OR m.ID = r.6th OR m.ID = r.7th ";
+    $sql.= "OR m.ID = r.8th OR m.ID = r.9th OR m.ID = r.10th ";
+    $sql.= "WHERE r.rating_id = $id";
+    //echo $sql;
+    $result = mysqli_query($db, $sql);
+    return $result;
+}
+
+function Current_Top_rated() 
+{
+    global $db; // must be on the top
+    $sql = "SELECT `ID`,`Title`,`Rating_Average` FROM `movies` ";
+    $sql.= "ORDER BY `Rating_Average` DESC, `Title` ASC LIMIT 10"; 
+    //echo $sql;
+    $result = mysqli_query($db, $sql);
+    return $result;
+}
+
+function Compare_Last_rated() 
+{
+    global $db; // must be on the top
+    $sql = "SELECT * FROM `ratings` ORDER BY `rating_id` DESC LIMIT 1";
+    //echo $sql;
+    $result = mysqli_query($db, $sql);
+    return $result;
+}
+
+function Insert_New_top10($top10) 
+{
+    global $db;
+    $sql = "INSERT INTO `ratings` ";
+    $sql .= "(`1st`, `2nd`, `3rd`, `4th`, `5th`, `6th`, `7th`, `8th`, `9th`, `10th`)";
+    $sql .= " VALUES (";      
+    $sql.= "'" . $top10[0] . "',";
+    $sql.= "'" . $top10[1] . "' ,";
+    $sql.= "'" . $top10[2] . "' ,";
+    $sql.= "'" . $top10[3] . "' ,";
+    $sql.= "'" . $top10[4] . "' ,";
+    $sql.= "'" . $top10[5] . "' ,";
+    $sql.= "'" . $top10[6] . "' ,";
+    $sql.= "'" . $top10[7] . "' ,";
+    $sql.= "'" . $top10[8] . "' ,";
+    $sql.= "'" . $top10[9] . "' ";
+    $sql.= ")";
+    $result = mysqli_query($db, $sql);
+    // For INSERT statements, $result is true/false
+    if ($result) {
+        return true;
+    } else {
+        // INSERT failed
+        echo mysqli_error($db);
+        db_disconnect($db);
+        exit;
+    }
+}
+
+function All_Top_Rated() 
+{
+    global $db; // must be on the top
+    $sql = "SELECT * FROM `ratings`"; 
+    //echo $sql;
+    $result = mysqli_query($db, $sql);
+    return $result;
+}
 ?>
