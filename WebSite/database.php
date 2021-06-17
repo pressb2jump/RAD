@@ -54,7 +54,8 @@ function DB_disconnect()
 function Find_All_movies() 
 {
     global $db; // must be on the top
-    $sql = "SELECT * FROM movies ";
+    $sql = "SELECT * 
+            FROM movies";
     //echo $sql;
     $result = mysqli_query($db, $sql);
     return $result;
@@ -68,7 +69,9 @@ function Find_All_movies()
 function Find_Top_movies() 
 {
     global $db; // must be on the top
-    $sql = "SELECT `Title`,`Search_Hits` FROM `movies` ORDER BY Search_Hits DESC, `Title` ASC LIMIT 10";
+    $sql = "SELECT `Title`,`Search_Hits` 
+            FROM `movies` 
+            ORDER BY Search_Hits DESC, `Title` ASC LIMIT 10";
     //echo $sql;
     $result = mysqli_query($db, $sql);
     return $result;
@@ -81,7 +84,9 @@ function Find_Top_movies()
 function Find_genres() 
 {
     global $db; // must be on the top
-    $sql = "SELECT DISTINCT `Genre` FROM `movies` ORDER BY `Genre` ASC";
+    $sql = "SELECT DISTINCT `Genre` 
+            FROM `movies` 
+            ORDER BY `Genre` ASC";
     //echo $sql;
     $result = mysqli_query($db, $sql);
     return $result;
@@ -94,7 +99,9 @@ function Find_genres()
 function Find_ratings() 
 {
     global $db; // must be on the top
-    $sql = "SELECT DISTINCT `Rating` FROM `movies` ORDER BY `Rating` ASC";
+    $sql = "SELECT DISTINCT `Rating` 
+            FROM `movies` 
+            ORDER BY `Rating` ASC";
     //echo $sql;
     $result = mysqli_query($db, $sql);
     return $result;
@@ -274,10 +281,6 @@ function Movie_Details($movieID)
     return $result;
 }
 
-function Find_Title(){
-    
-}
-
 function Top_Rated_info($id) 
 {
     global $db; // must be on the top
@@ -348,5 +351,22 @@ function All_Top_Rated()
     //echo $sql;
     $result = mysqli_query($db, $sql);
     return $result;
+}
+
+function Updating_Database_Rating($total, $amount, $average, $movieID)
+{
+    global $db;
+    $sql = "UPDATE `movies` SET `Rating_Total`= $total,`Rating_Amount`= $amount,`Rating_Average`= $average WHERE `ID`= $movieID";
+
+    $result = mysqli_query($db, $sql);
+    // For INSERT statements, $result is true/false
+    if ($result) {
+        return true;
+    } else {
+        // INSERT failed
+        echo mysqli_error($db);
+        db_disconnect($db);
+        exit;
+    }
 }
 ?>

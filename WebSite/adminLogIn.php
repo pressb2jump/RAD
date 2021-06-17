@@ -47,6 +47,7 @@ $result = Get_Admin();
         <ul class="nav nav-pills nav-stacked">
             <li><a href="search_Movie.php">Search Movies</a></li>
             <li><a href="top_Searched.php">Top 10 Searched Movies</a></li>
+            <li><a href="top_Rated.php">Top 10 Rated Movies</a></li>
             <li><a href="userSignUp.php">User Signup</a></li>
             <li><a href="showUsers.php">View All Users</a></li>
             <li><a href="adminLogIn.php">Administrator Section</a></li>
@@ -61,12 +62,12 @@ $result = Get_Admin();
             <div class="form-group">
                 <label for="user_name">Username:</label>
                 <input type="text" class="form-control" id="user_name" 
-                name="user_name" pattern= "[a-zA-Z\- ']*" required>
+                name="user_name" pattern= "[a-zA-Z\- '\d]*" required>
             </div>
             <div class="form-group">
                 <label for="password">Password:</label>
                 <input type="password" class="form-control" id="password" 
-                name="password" pattern= "[a-zA-Z\- ']*" required>
+                name="password" pattern= "^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[\W])(?=\S*[A-Z])(?=\S*[\d])\S*$" required>
             </div>
             <button type="submit" name="btnSubmit" 
             class="btn btn-default">Log-In</button>
@@ -84,13 +85,10 @@ $result = Get_Admin();
                 if(strcmp($password, $login['password']) == 0) {
                     header('Location: showUsers.php');
                     exit;
-                } else {
-                    echo "<h1>Username OR Password Incorrect.</h1>";
                 }
-            } else {
-                echo "<h1>Username OR Password Incorrect.</h1>";
-            }
+            } 
         }
+        echo "<h1>Username OR Password Incorrect.</h1>";
     }
     ?>
     </main>

@@ -54,6 +54,7 @@ require 'header.php';
         <ul class="nav nav-pills nav-stacked">
             <li><a href="search_Movie.php">Search Movies</a></li>
             <li><a href="top_Searched.php">Top 10 Searched Movies</a></li>
+            <li><a href="top_Rated.php">Top 10 Rated Movies</a></li>
             <li><a href="userSignUp.php">User Signup</a></li>
             <li><a href="showUsers.php">View All Users</a></li>
             <li><a href="adminLogIn.php">Administrator Section</a></li>
