@@ -152,10 +152,11 @@ else //same
         },
         subtitles:[
 		{
-			text: "<?php echo $date; ?>"
+			text: "<?php echo $date; ?>",
 			//Uncomment properties below to see how they behave
 			//fontColor: "red",
-			//fontSize: 30
+			fontSize: 30,
+            fontWeight: "bold" 
 		}
 		],
         axisY: {
