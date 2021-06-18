@@ -67,7 +67,7 @@ $result = Get_Admin();
             <div class="form-group">
                 <label for="password">Password:</label>
                 <input type="password" class="form-control" id="password" 
-                name="password" pattern= "^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[\W])(?=\S*[A-Z])(?=\S*[\d])\S*$" required>
+                name="password" pattern= "^\S*(?=\S{8,})(?=\S*[a-z])(?=\S{1,}[!?@#$%^=&])(?=\S*[A-Z])(?=\S*[\d])\S*$" required>
             </div>
             <button type="submit" name="btnSubmit" 
             class="btn btn-default">Log-In</button>
