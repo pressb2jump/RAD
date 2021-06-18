@@ -290,7 +290,8 @@ function Top_Rated_info($id)
     $sql.= "OR m.ID = r.4th OR m.ID = r.5th ";
     $sql.= "OR m.ID = r.6th OR m.ID = r.7th ";
     $sql.= "OR m.ID = r.8th OR m.ID = r.9th OR m.ID = r.10th ";
-    $sql.= "WHERE r.rating_id = $id";
+    $sql.= "WHERE r.rating_id = $id ";
+    $sql.= "ORDER BY m.Rating_Average DESC";
     //echo $sql;
     $result = mysqli_query($db, $sql);
     return $result;
@@ -358,6 +359,31 @@ function Updating_Database_Rating($total, $amount, $average, $movieID)
     global $db;
     $sql = "UPDATE `movies` SET `Rating_Total`= $total,`Rating_Amount`= $amount,`Rating_Average`= $average WHERE `ID`= $movieID";
 
+    $result = mysqli_query($db, $sql);
+    // For INSERT statements, $result is true/false
+    if ($result) {
+        return true;
+    } else {
+        // INSERT failed
+        echo mysqli_error($db);
+        db_disconnect($db);
+        exit;
+    }
+}
+
+Function Insert_averages($ratingsID, $averages)
+{
+    global $db;
+    $sql = "INSERT INTO `averages`(`Rating_ID`, `Average`) VALUES ('".$ratingsID."',""'".$averages[0]."');";
+    $sql .= "INSERT INTO `averages`(`Rating_ID`, `Average`) VALUES ('".$ratingsID."',""'".$averages[1]."');";
+    $sql .= "INSERT INTO `averages`(`Rating_ID`, `Average`) VALUES ('".$ratingsID."',""'".$averages[2]."');";
+    $sql .= "INSERT INTO `averages`(`Rating_ID`, `Average`) VALUES ('".$ratingsID."',""'".$averages[3]."');";
+    $sql .= "INSERT INTO `averages`(`Rating_ID`, `Average`) VALUES ('".$ratingsID."',""'".$averages[4]."');";
+    $sql .= "INSERT INTO `averages`(`Rating_ID`, `Average`) VALUES ('".$ratingsID."',""'".$averages[5]."');";
+    $sql .= "INSERT INTO `averages`(`Rating_ID`, `Average`) VALUES ('".$ratingsID."',""'".$averages[6]."');";
+    $sql .= "INSERT INTO `averages`(`Rating_ID`, `Average`) VALUES ('".$ratingsID."',""'".$averages[7]."');";
+    $sql .= "INSERT INTO `averages`(`Rating_ID`, `Average`) VALUES ('".$ratingsID."',""'".$averages[8]."');";
+    $sql .= "INSERT INTO `averages`(`Rating_ID`, `Average`) VALUES ('".$ratingsID."',""'".$averages[9]."');";
     $result = mysqli_query($db, $sql);
     // For INSERT statements, $result is true/false
     if ($result) {
