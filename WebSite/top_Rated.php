@@ -61,6 +61,7 @@ if (array_diff($current_results,$last_results) != null) //different
 {
     //print_r(array_diff($current_results,$last_results));
     Insert_New_top10($current_results);
+    header("Refresh:0");
     //echo "Updated";
 }
 else //same
