@@ -32,16 +32,20 @@ $db = DB_connect();
 // declare arrays that will be used below
 $results = array();
 $current_results = array();
+$current_averages = array();
 $last_results = array();
 // Uses function from database to get top 10 rated movies
 $current = Current_Top_rated();
 $last = Compare_Last_rated();
 $all_top_rated = All_Top_rated();
+$nextRatingID;
 //gets current top 10 rated from movies table
-while ($currentID = mysqli_fetch_assoc($current)) {
-    $current_results[] = $currentID['ID'];
+while ($currentrow = mysqli_fetch_assoc($current)) {
+    $current_results[] = $currentrow['ID'];
+    $current_averages[] = $currentrow['Rating_Average'];
 }
 //print_r($current_results);
+//print_r($current_averages);
 //gets last row of rating table
 while ($lastrow = mysqli_fetch_assoc($last)) {
     $last_results = array($lastrow['1st']
@@ -54,6 +58,7 @@ while ($lastrow = mysqli_fetch_assoc($last)) {
     , $lastrow['8th']
     , $lastrow['9th']
     , $lastrow['10th']);
+    $nextRatingID = $lastrow['rating_id'] + 1;
 }
 //print_r($last_results);
 //compare 2 arrays and do an update if different
@@ -61,6 +66,7 @@ if (array_diff($current_results,$last_results) != null) //different
 {
     //print_r(array_diff($current_results,$last_results));
     Insert_New_top10($current_results);
+    Insert_averages($nextRatingID, $current_averages);
     header("Refresh:0");
     //echo "Updated";
 }
@@ -130,12 +136,12 @@ else //same
         }
         function getResults($id, $date)
         {
-            $row = Top_Rated_info($id);
+            $row = Top_Rated_movies($id);
             // unset($results);
             // $results = array();
             while ($movies = mysqli_fetch_assoc($row)) {
                 // add to array with Title as index(Key) and Search_Hits as Value 
-                $results[] = array("label" => $movies['Title'], "y" => $movies['Rating_Average']);
+                $results[] = array("label" => $movies['Title'], "y" => $movies['Average']);
             }
             //print_r($results);
             build_chart($results, $date);

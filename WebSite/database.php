@@ -281,17 +281,10 @@ function Movie_Details($movieID)
     return $result;
 }
 
-function Top_Rated_info($id) 
+function Top_Rated_movies($id) 
 {
     global $db; // must be on the top
-    $sql = "SELECT m.* FROM `ratings` r "; 
-    $sql.= "INNER JOIN movies m ON m.ID = r.1st ";
-    $sql.= "OR m.ID = r.2nd OR m.ID = r.3rd "; 
-    $sql.= "OR m.ID = r.4th OR m.ID = r.5th ";
-    $sql.= "OR m.ID = r.6th OR m.ID = r.7th ";
-    $sql.= "OR m.ID = r.8th OR m.ID = r.9th OR m.ID = r.10th ";
-    $sql.= "WHERE r.rating_id = $id ";
-    $sql.= "ORDER BY m.Rating_Average DESC";
+    $sql = "SELECT m.*, a.* FROM `ratings` AS r INNER JOIN movies AS m ON m.ID = r.1st OR m.ID = r.2nd OR m.ID = r.3rd OR m.ID = r.4th OR m.ID = r.5th OR m.ID = r.6th OR m.ID = r.7th OR m.ID = r.8th OR m.ID = r.9th OR m.ID = r.10th INNER JOIN averages AS a ON a.Rating_ID =r.rating_id AND a.Movie_ID = m.ID WHERE r.rating_id = $id ORDER BY a.Average_ID ASC;"; 
     //echo $sql;
     $result = mysqli_query($db, $sql);
     return $result;
@@ -375,7 +368,7 @@ function Insert_averages($ratingsID, $averages)
 {
     global $db;
     $sql = "INSERT INTO `averages` ";
-    $sql .= "(`Rating_ID`, `Average`)";
+    $sql .= "(`Rating_ID`, `Average`, `Movie_ID`)";
     $sql .=" VALUES ('".$ratingsID."','".$averages[0]."')";
     $sql .= ",('".$ratingsID."','".$averages[1]."')";
     $sql .= ",('".$ratingsID."','".$averages[2]."')";
@@ -397,4 +390,5 @@ function Insert_averages($ratingsID, $averages)
         exit;
     }
 }
+
 ?>
