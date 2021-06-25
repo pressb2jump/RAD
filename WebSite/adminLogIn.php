@@ -26,7 +26,7 @@
 require 'header.php';
 require_once 'database.php';
 $db = DB_connect();
-$result = Get_Admin();
+$result = Get_admin();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -67,30 +67,32 @@ $result = Get_Admin();
             <div class="form-group">
                 <label for="password">Password:</label>
                 <input type="password" class="form-control" id="password" 
-                name="password" pattern= "^\S*(?=\S{8,})(?=\S*[a-z])(?=\S{1,}[!?@#$%^=&])(?=\S*[A-Z])(?=\S*[\d])\S*$" required>
+                name="password" 
+                pattern= "^\S*(?=\S{8,})(?=\S*[a-z])(?=\S{1,}[!?@#$%^=&])(?=\S*[A-Z])(?=\S*[\d])\S*$" 
+                required>
             </div>
             <button type="submit" name="btnSubmit" 
             class="btn btn-default">Log-In</button>
         </form>
         <?php
-    if (isset($_POST["btnSubmit"])) {
-        $login['user_name'] = $_POST['user_name'];
-        $login['password'] = $_POST['password'];
+        if (isset($_POST["btnSubmit"])) {
+            $login['user_name'] = $_POST['user_name'];
+            $login['password'] = $_POST['password'];
         
-        while ($row = mysqli_fetch_assoc($result)) {
-            $userName = $row["username"];
-            $password = $row["password"];
+            while ($row = mysqli_fetch_assoc($result)) {
+                $userName = $row["username"];
+                $password = $row["password"];
 
-            if(strcmp($userName, $login['user_name']) == 0){
-                if(strcmp($password, $login['password']) == 0) {
-                    header('Location: showUsers.php');
-                    exit;
-                }
-            } 
+                if (strcmp($userName, $login['user_name']) == 0) {
+                    if (strcmp($password, $login['password']) == 0) {
+                        header('Location: showUsers.php');
+                        exit;
+                    }
+                } 
+            }
+            echo "<h1>Username OR Password Incorrect.</h1>";
         }
-        echo "<h1>Username OR Password Incorrect.</h1>";
-    }
-    ?>
+        ?>
     </main>
 </div>
 </body>

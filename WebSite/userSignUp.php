@@ -27,7 +27,7 @@ require 'header.php';
 require_once 'database.php';
 $db = DB_connect();
 $emailCheck = User_Check();
-(bool)$dupe = False;
+(bool)$dupe = false;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -90,29 +90,28 @@ $emailCheck = User_Check();
             class="btn btn-default">Sign Up</button>
         </form>
         <?php
-    if (isset($_POST["btnSubmit"])) {
-        $user['first_name'] = $_POST['first_name'];
-        $user['last_name'] = $_POST['last_name'];
-        $user['email'] = $_POST['emailAddress'];
-        $user['news_letter'] = $_POST['news_letter'];
-        $user['news_blast'] = $_POST['news_blast'];
-        while ($emails = mysqli_fetch_assoc($emailCheck)) { 
-            if (strcmp($emails['email'],$_POST['emailAddress'])==0){
-                (bool)$dupe = True;
+        if (isset($_POST["btnSubmit"])) {
+            $user['first_name'] = $_POST['first_name'];
+            $user['last_name'] = $_POST['last_name'];
+            $user['email'] = $_POST['emailAddress'];
+            $user['news_letter'] = $_POST['news_letter'];
+            $user['news_blast'] = $_POST['news_blast'];
+            while ($emails = mysqli_fetch_assoc($emailCheck)) { 
+                if (strcmp($emails['email'], $_POST['emailAddress'])==0) {
+                    (bool)$dupe = true;
+                }
             }
+            if ((bool)$dupe == true) {
+                Update_user($user);
+                header('Location: showUsers.php');
+                exit;
+            } else {
+                Insert_user($user);
+                header('Location: showUsers.php');
+                exit;
+            }    
         }
-        if ((bool)$dupe == True){
-            Update_user($user);
-            header('Location: showUsers.php');
-            exit;
-        }
-        else{
-            Insert_user($user);
-            header('Location: showUsers.php');
-            exit;
-        }    
-    }
-    ?>
+        ?>
         <a href="unsubscribe.php">Unsubscribe</a>
     </main>
 </div>

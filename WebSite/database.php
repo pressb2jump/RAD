@@ -201,7 +201,13 @@ function Insert_user($user)
         exit;
     }
 }
-
+/**
+ * Delete User query
+ *
+ * @param array $user anything
+ * 
+ * @return bool
+ */
 function Delete_user($user) 
 {
     global $db;
@@ -223,6 +229,13 @@ function Delete_user($user)
         exit;
     }
 }
+/**
+ * Show User query
+ *
+ * @param array $user anything
+ * 
+ * @return $result
+ */
 function Show_user($user)
 {
     global $db;
@@ -231,8 +244,12 @@ function Show_user($user)
     return $result;
     
 }
-
-function Get_Admin()
+/**
+ * Get Admin query
+ * 
+ * @return $result
+ */
+function Get_admin()
 {
     global $db; // must be on the top
     $sql = "SELECT * FROM `admin`";
@@ -241,15 +258,25 @@ function Get_Admin()
     return $result;
     
 }
-
-function User_Check()
+/**
+ * User Check query
+ * 
+ * @return $result
+ */
+function User_check()
 {
     global $db;
     $sql = "SELECT `email` FROM user";
     $result = mysqli_query($db, $sql);    
     return $result;    
 }
-
+/**
+ * Update User query
+ *
+ * @param array $user anything
+ * 
+ * @return bool
+ */
 function Update_user($user) 
 {
     global $db;
@@ -270,8 +297,14 @@ function Update_user($user)
         exit;
     }
 }
-
-function Movie_Details($movieID)
+/**
+ * Movie Details query
+ *
+ * @param array $movieID anything
+ * 
+ * @return $result
+ */
+function Movie_details($movieID)
 {
     global $db; // must be on the top
     $sql = "SELECT * FROM `movies` ";
@@ -280,16 +313,32 @@ function Movie_Details($movieID)
     $result = mysqli_query($db, $sql);
     return $result;
 }
-
+/**
+ * Get top rated movies
+ *
+ * @param array $id anything
+ * 
+ * @return $result
+ */
 function Top_Rated_movies($id) 
 {
     global $db; // must be on the top
-    $sql = "SELECT m.*, a.* FROM `ratings` AS r INNER JOIN movies AS m ON m.ID = r.1st OR m.ID = r.2nd OR m.ID = r.3rd OR m.ID = r.4th OR m.ID = r.5th OR m.ID = r.6th OR m.ID = r.7th OR m.ID = r.8th OR m.ID = r.9th OR m.ID = r.10th INNER JOIN averages AS a ON a.Rating_ID =r.rating_id AND a.Movie_ID = m.ID WHERE r.rating_id = $id ORDER BY a.Average_ID ASC;"; 
+    $sql = "SELECT m.*, a.* FROM `ratings` AS r"; 
+    $sql.= " INNER JOIN movies AS m ON m.ID = r.1st"; 
+    $sql.= " OR m.ID = r.2nd OR m.ID = r.3rd OR m.ID = r.4th";
+    $sql.= " OR m.ID = r.5th OR m.ID = r.6th OR m.ID = r.7th";
+    $sql.= " OR m.ID = r.8th OR m.ID = r.9th OR m.ID = r.10th";
+    $sql.= " INNER JOIN averages AS a ON a.Rating_ID =r.rating_id";
+    $sql.= " AND a.Movie_ID = m.ID WHERE r.rating_id = $id ORDER BY a.Average_ID ASC;"; 
     //echo $sql;
     $result = mysqli_query($db, $sql);
     return $result;
 }
-
+/**
+ * Current Top rated query
+ *
+ * @return $result
+ */
 function Current_Top_rated() 
 {
     global $db; // must be on the top
@@ -299,7 +348,11 @@ function Current_Top_rated()
     $result = mysqli_query($db, $sql);
     return $result;
 }
-
+/**
+ * Get last added top 10 query
+ *
+ * @return $result
+ */
 function Compare_Last_rated() 
 {
     global $db; // must be on the top
@@ -308,7 +361,13 @@ function Compare_Last_rated()
     $result = mysqli_query($db, $sql);
     return $result;
 }
-
+/**
+ * Insert new Top 10 query
+ *
+ * @param array $top10 anything
+ * 
+ * @return bool
+ */
 function Insert_New_top10($top10) 
 {
     global $db;
@@ -337,8 +396,12 @@ function Insert_New_top10($top10)
         exit;
     }
 }
-
-function All_Top_Rated() 
+/**
+ * Get all top10 rated movies
+ * 
+ * @return $result
+ */
+function All_Top_rated() 
 {
     global $db; // must be on the top
     $sql = "SELECT * FROM `ratings`"; 
@@ -346,11 +409,21 @@ function All_Top_Rated()
     $result = mysqli_query($db, $sql);
     return $result;
 }
-
-function Updating_Database_Rating($total, $amount, $average, $movieID)
+/**
+ * Update rating query
+ *
+ * @param int    $total   anything
+ * @param int    $amount  anything
+ * @param double $average anything
+ * @param int    $movieID anything
+ * 
+ * @return bool
+ */
+function Updating_Database_rating($total, $amount, $average, $movieID)
 {
     global $db;
-    $sql = "UPDATE `movies` SET `Rating_Total`= $total,`Rating_Amount`= $amount,`Rating_Average`= $average WHERE `ID`= $movieID";
+    $sql = "UPDATE `movies` SET `Rating_Total`= $total,`Rating_Amount`= $amount,";
+    $sql.= " `Rating_Average`= $average WHERE `ID`= $movieID";
 
     $result = mysqli_query($db, $sql);
     // For INSERT statements, $result is true/false
@@ -363,7 +436,15 @@ function Updating_Database_Rating($total, $amount, $average, $movieID)
         exit;
     }
 }
-
+/**
+ * Insert Averages query
+ *
+ * @param int   $ratingsID anything
+ * @param array $averages  anything
+ * @param array $movieID   anything
+ * 
+ * @return bool
+ */
 function Insert_averages($ratingsID, $averages, $movieID)
 {
     global $db;

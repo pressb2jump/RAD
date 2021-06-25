@@ -75,7 +75,7 @@
                 <th>Average Rating</th>
             </tr>
             ";
-            while ($movies = mysqli_fetch_assoc($movies_set)) { 
+        while ($movies = mysqli_fetch_assoc($movies_set)) { 
                 $ratingTotal = $movies['Rating_Total'];
                 $ratingAmount = $movies['Rating_Amount'];
                 echo "
@@ -92,36 +92,30 @@
                 <td>".$movies['Genre']."</td>
                 <td>".$movies['Rating_Average']."</td>
             </tr>";
-            } 
-            ?>
+        } 
+        ?>
     </table>
     <form action="moreInfo.php?id=<?php echo $movieID?>" 
         method="post">
         <div class="form-group">
             <label for="rated">Rate this film between 1 and 100:</label>
             <input type="number" id="rated" name="rated" min="1" max="100" required>
-            <button type="submit" name="btnSubmit" class="btn btn-default">Submit Rating</button>
+            <button type="submit" name="btnSubmit" class="btn btn-default">
+            Submit Rating</button>
         </div>
     </form>
-    <?php 
-    
-
-
-        if (isset($_POST["btnSubmit"])) {  
+    <?php    
+    if (isset($_POST["btnSubmit"])) {  
 
             $userMovieRating = $_POST['rated'];
 
             (int)$total = (int)$ratingTotal + (int)$userMovieRating;
             (int)$amount = (int)$ratingAmount + 1;
             (double)$average = (int)$total / (int)$amount;
-
-            //echo "Total: " . $total .  " Amount:  " . $amount . " Average: " . $average . " MovieID: " . $_REQUEST['id'];
-
             Updating_Database_Rating((int)$total, (int)$amount, (double)$average, (int)$updatingID);
-           
             header('Location: search_Movie.php');
             exit;
-        }
+    }
     ?>
     </main>
 </div>

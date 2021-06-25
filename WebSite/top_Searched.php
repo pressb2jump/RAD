@@ -35,8 +35,8 @@ $results = array();
 $movies_set = Find_Top_movies();
 // returns the array as movie_set objects
 while ($movies = mysqli_fetch_assoc($movies_set)) {
-        // add to array with Title as index(Key) and Search_Hits as Value 
-        $results[] = array("label" => $movies['Title'], "y" => $movies['Search_Hits']);
+    // add to array with Title as index(Key) and Search_Hits as Value 
+    $results[] = array("label" => $movies['Title'], "y" => $movies['Search_Hits']);
 }
 ?>
 <!DOCTYPE html>
@@ -55,18 +55,18 @@ while ($movies = mysqli_fetch_assoc($movies_set)) {
     window.onload = function () {
  
     var chart = new CanvasJS.Chart("chartContainer", {
-	animationEnabled: true,
-	theme: "light2", // "light1", "light2", "dark1", "dark2"
-	title: {
-		text: "Top 10 Searched Movies"
-	},
-	axisY: {
-		title: "Number of Searches"
-	},
-	data: [{
-		type: "column",
-		dataPoints: <?php echo json_encode($results, JSON_NUMERIC_CHECK); ?>
-	}]
+    animationEnabled: true,
+    theme: "light2", // "light1", "light2", "dark1", "dark2"
+    title: {
+        text: "Top 10 Searched Movies"
+    },
+    axisY: {
+        title: "Number of Searches"
+    },
+    data: [{
+        type: "column",
+        dataPoints: <?php echo json_encode($results, JSON_NUMERIC_CHECK); ?>
+    }]
     });
     chart.render(); }
     </script> 
@@ -87,7 +87,8 @@ while ($movies = mysqli_fetch_assoc($movies_set)) {
       
     <main class="col-lg-20">
         <h1>Top 10 most Searched Movies</h1>
-        <div id="chartContainer" style="height: 370px; width: 80%;" aria-label="Chart" role="img"></div>
+        <div id="chartContainer" style="height: 370px; width: 80%;" 
+        aria-label="Chart" role="img"></div>
         <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
     </div>
     </main>

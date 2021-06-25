@@ -70,20 +70,21 @@ require 'header.php';
                 <label for="emailAddress">Email:</label>
                 <input type="text" class="form-control" id="emailAddress" 
                 name="emailAddress" 
-                pattern="[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*" required>
+                pattern="[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*" 
+                required>
             </div>
             <button type="submit" name="btnSubmit" 
             class="btn btn-default">Unsubscribe</button>
         </form>
         <?php
-    if (isset($_POST["btnSubmit"])) {
-        $email = $_POST['emailAddress'];
-        $message = $email." would like to unsubscribe from the newsletter service.";
-        mail("M201796@Tafe.wa.edu.au", "Unsubscribe", $message);
-        header('Location: unsubscribe.php');
-        exit;
-    }
-    ?>
+        if (isset($_POST["btnSubmit"])) {
+            $email = $_POST['emailAddress'];
+            $message = $email." would like to unsubscribe from the newsletter service.";
+            mail("M201796@Tafe.wa.edu.au", "Unsubscribe", $message);
+            header('Location: unsubscribe.php');
+            exit;
+        }
+        ?>
     </main>
 </div>
 </body>

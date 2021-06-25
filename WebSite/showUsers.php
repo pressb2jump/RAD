@@ -76,8 +76,7 @@ $result = Show_user($userEmail);
         if (isset($_POST["btnSubmit"])) {   
             header('Location: showUsers.php');
             exit;
-        }
-        else {
+        } else {
             if ($_POST['email'] =='') {
                 $title = $_POST['email'];
             }
@@ -91,7 +90,7 @@ $result = Show_user($userEmail);
                 <th>Delete User</th>
             </tr>
             <?php
-                while ($row = mysqli_fetch_assoc($result)) {
+            while ($row = mysqli_fetch_assoc($result)) {
                     $firstName = $row["first_name"];
                     $lastName = $row["last_name"];
                     $email = $row["email"];
@@ -103,9 +102,9 @@ $result = Show_user($userEmail);
                             <td>".$email."</td>
                             <td><a href='deleteUser.php?id=$userID'>Delete</a></td>
                         </tr>";
-                }
+            }
                 echo "</table>";
-          ?>
+            ?>
         </table>
     </main>
 </div>

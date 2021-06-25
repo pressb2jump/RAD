@@ -61,8 +61,7 @@ while ($lastrow = mysqli_fetch_assoc($last)) {
 }
 //print_r($last_results);
 //compare 2 arrays and do an update if different
-if (array_diff($current_results,$last_results) != null) //different
-{
+if (array_diff($current_results, $last_results) != null) {//different
     //print_r(array_diff($current_results,$last_results));
     Insert_New_top10($current_results);
     $newAddition = Compare_Last_rated();
@@ -72,10 +71,6 @@ if (array_diff($current_results,$last_results) != null) //different
     Insert_averages($nextRatingID, $current_averages, $current_results);
     header("Refresh:0");
     //echo "Updated";
-}
-else //same
-{
-    //echo "same";
 }
 ?>
 <!DOCTYPE html>
@@ -127,8 +122,7 @@ else //same
             </div>
         </form>
         <?php
-        if (isset($_POST['selection']))
-        {
+        if (isset($_POST['selection'])) {
             $value = $_POST['selection'];
             //echo $value;
             $value_explode = explode('|', $value);
@@ -136,7 +130,17 @@ else //same
             $date = $value_explode[1];
             //echo $id;
             getResults($id, $date);
+        } else {
+            echo "<h1>Please Select a Date from the Selection Box</h1>";
         }
+        /**
+         * Get result 
+         *
+         * @param int    $id   anything
+         * @param string $date anything
+         * 
+         * @return void
+         */
         function getResults($id, $date)
         {
 
@@ -148,44 +152,54 @@ else //same
                 $results[] = array("label" => $movies['Title'], "y" => $movies['Average']);
             }
             //print_r($results);
-            build_chart($results, $date);
+            Build_chart($results, $date);
         }
-
-        function build_chart($results, $date)
-        {?>
-        <script>
-        window.onload = function () {
-        var chart = new CanvasJS.Chart("chartContainer", {
-        animationEnabled: true,
-        theme: "light2", // "light1", "light2", "dark1", "dark2"
-        title: {
-            text: "Top 10 rated movies"
-        },
-        subtitles:[
-		{
-			text: "<?php echo $date; ?>",
-			//Uncomment properties below to see how they behave
-			//fontColor: "red",
-			fontSize: 30,
-            fontWeight: "bold" 
-		}
-		],
-        axisY: {
-            title: "Rating Average"
-        },
-        data: [{
-            //legendMarkerType: "square",
-            type: "column",
-            //showInLegend: true,
-            dataPoints:<?php echo json_encode($results, JSON_NUMERIC_CHECK); ?>
-            
-        }]
-        });
-        chart.render(); }
-        </script>
-        <?php }
-    ?>
-        <div aria-label="Chart" role="img" id="chartContainer" style="height: 370px; width: 80%;" ></div>
+        /**
+         * Build Chart
+         *
+         * @param array  $results anything
+         * @param string $date    anything
+         * 
+         * @return void
+         */
+        function Build_chart($results, $date)
+        {
+            ?>
+            <script>
+            window.onload = function () {
+            var chart = new CanvasJS.Chart("chartContainer", {
+            animationEnabled: true,
+            theme: "light2", // "light1", "light2", "dark1", "dark2"
+            title: {
+                text: "Top 10 rated movies"
+            },
+            subtitles:[
+            {
+                text: "<?php echo $date; ?>",
+                //Uncomment properties below to see how they behave
+                //fontColor: "red",
+                fontSize: 30,
+                fontWeight: "bold" 
+            }
+            ],
+            axisY: {
+                title: "Rating Average"
+            },
+            data: [{
+                //legendMarkerType: "square",
+                type: "column",
+                //showInLegend: true,
+                dataPoints:<?php echo json_encode($results, JSON_NUMERIC_CHECK); ?>
+                
+            }]
+            });
+            chart.render(); }
+            </script>
+            <?php 
+        }
+        ?>
+        <div aria-label="Chart" role="img" id="chartContainer" 
+        style="height: 370px; width: 80%;" ></div>
         <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
     </div>
     </main>

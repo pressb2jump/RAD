@@ -29,7 +29,7 @@ $db = DB_connect();
 $userID = $_REQUEST['id'];
 
 $sql = "DELETE FROM user WHERE user_id =" . $userID;
-if (mysqli_query($db, $sql) === TRUE) {
+if (mysqli_query($db, $sql) === true) {
     header('Location: showUsers.php');
     exit;
 } else {
