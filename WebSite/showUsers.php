@@ -83,7 +83,7 @@ $result = Show_user($userEmail);
             }
         }
         ?>
-        <table>
+        <table id="usersTable">
             <tr>
                 <th>First Name</th>
                 <th>Last Name</th>

@@ -64,6 +64,7 @@ Update_Search_hits($title, $rating, $genre, $year);
 <div id="data-body" class="row">
     <nav id="data-nav-bar" class="col-lg-2 bg-info">
         <h2 class="text-center">Page Links</h2>
+        <h2 class="text-center">ACME</h2>
         <ul class="nav nav-pills nav-stacked">
             <li><a href="search_Movie.php">Search Movies</a></li>
             <li><a href="top_Searched.php">Top 10 Searched Movies</a></li>
@@ -129,7 +130,7 @@ Update_Search_hits($title, $rating, $genre, $year);
             echo("<h1>$results Search Results</h1>");
         }
         ?>
-        <table>
+        <table id="movies">
             <tr>
                 <th>Title</th>
                 <th>Studio</th>

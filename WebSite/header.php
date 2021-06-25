@@ -24,12 +24,12 @@
 ?>
 <header>
   <!-- Navbar -->
-  <div class="topnav">
+  <!-- <div class="topnav">
         <a href="search_Movie.php">Search Movies</a>
         <a href="top_Movies.php">Top 10</a>
         <a href="userSignUp.php">User Signup</a>
         <a href="showUsers.php">View All Users</a>
-  </div>
+  </div> -->
   
   <!-- Navbar -->
 </header>
