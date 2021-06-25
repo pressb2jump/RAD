@@ -72,7 +72,7 @@ while ($movies = mysqli_fetch_assoc($movies_set)) {
     </script> 
 </head>
 <body>
-<div id="data-body" class="row">
+<div id="data-body" class="row" aria-label="Top 10 Searched Movies">
     <nav id="data-nav-bar" class="col-lg-2 bg-info">
         <h2 class="text-center">Page Links</h2>
         <ul class="nav nav-pills nav-stacked">
@@ -87,7 +87,7 @@ while ($movies = mysqli_fetch_assoc($movies_set)) {
       
     <main class="col-lg-20">
         <h1>Top 10 most Searched Movies</h1>
-        <div id="chartContainer" style="height: 370px; width: 80%;"></div>
+        <div id="chartContainer" style="height: 370px; width: 80%;" aria-label="Chart" role="img"></div>
         <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
     </div>
     </main>

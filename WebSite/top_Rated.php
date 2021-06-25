@@ -58,7 +58,6 @@ while ($lastrow = mysqli_fetch_assoc($last)) {
     , $lastrow['8th']
     , $lastrow['9th']
     , $lastrow['10th']);
-    $nextRatingID = $lastrow['rating_id'] + 1;
 }
 //print_r($last_results);
 //compare 2 arrays and do an update if different
@@ -66,7 +65,11 @@ if (array_diff($current_results,$last_results) != null) //different
 {
     //print_r(array_diff($current_results,$last_results));
     Insert_New_top10($current_results);
-    Insert_averages($nextRatingID, $current_averages);
+    $newAddition = Compare_Last_rated();
+    while ($lastaddition = mysqli_fetch_assoc($newAddition)) {
+        $nextRatingID = $lastaddition['rating_id'];
+    }
+    Insert_averages($nextRatingID, $current_averages, $current_results);
     header("Refresh:0");
     //echo "Updated";
 }
@@ -108,7 +111,7 @@ else //same
             $_SERVER["PHP_SELF"]
         ); 
 ?>" method="post">
-        <div class="form-group">
+        <div aria-label="Selection Form" class="form-group">
                 <label for="selection">Date of Ratings:</label>
                 <select onChange= "this.form.submit()" name="selection" id="selection">
                 <option  <?php ?>>
@@ -136,9 +139,10 @@ else //same
         }
         function getResults($id, $date)
         {
+
             $row = Top_Rated_movies($id);
-            // unset($results);
-            // $results = array();
+            //unset($results);
+            $results = array();
             while ($movies = mysqli_fetch_assoc($row)) {
                 // add to array with Title as index(Key) and Search_Hits as Value 
                 $results[] = array("label" => $movies['Title'], "y" => $movies['Average']);
@@ -181,7 +185,7 @@ else //same
         </script>
         <?php }
     ?>
-        <div id="chartContainer" style="height: 370px; width: 80%;"></div>
+        <div aria-label="Chart" role="img" id="chartContainer" style="height: 370px; width: 80%;" ></div>
         <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
     </div>
     </main>

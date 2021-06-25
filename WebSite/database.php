@@ -364,21 +364,21 @@ function Updating_Database_Rating($total, $amount, $average, $movieID)
     }
 }
 
-function Insert_averages($ratingsID, $averages)
+function Insert_averages($ratingsID, $averages, $movieID)
 {
     global $db;
     $sql = "INSERT INTO `averages` ";
     $sql .= "(`Rating_ID`, `Average`, `Movie_ID`)";
-    $sql .=" VALUES ('".$ratingsID."','".$averages[0]."')";
-    $sql .= ",('".$ratingsID."','".$averages[1]."')";
-    $sql .= ",('".$ratingsID."','".$averages[2]."')";
-    $sql .= ",('".$ratingsID."','".$averages[3]."')";
-    $sql .= ",('".$ratingsID."','".$averages[4]."')";
-    $sql .= ",('".$ratingsID."','".$averages[5]."')";
-    $sql .= ",('".$ratingsID."','".$averages[6]."')";
-    $sql .= ",('".$ratingsID."','".$averages[7]."')";
-    $sql .= ",('".$ratingsID."','".$averages[8]."')";
-    $sql .= ",('".$ratingsID."','".$averages[9]."');";
+    $sql .=" VALUES ('".$ratingsID."','".$averages[0]."','".$movieID[0]."')";
+    $sql .= ",('".$ratingsID."','".$averages[1]."','".$movieID[1]."')";
+    $sql .= ",('".$ratingsID."','".$averages[2]."','".$movieID[2]."')";
+    $sql .= ",('".$ratingsID."','".$averages[3]."','".$movieID[3]."')";
+    $sql .= ",('".$ratingsID."','".$averages[4]."','".$movieID[4]."')";
+    $sql .= ",('".$ratingsID."','".$averages[5]."','".$movieID[5]."')";
+    $sql .= ",('".$ratingsID."','".$averages[6]."','".$movieID[6]."')";
+    $sql .= ",('".$ratingsID."','".$averages[7]."','".$movieID[7]."')";
+    $sql .= ",('".$ratingsID."','".$averages[8]."','".$movieID[8]."')";
+    $sql .= ",('".$ratingsID."','".$averages[9]."','".$movieID[9]."');";
     $result = mysqli_query($db, $sql);
     // For INSERT statements, $result is true/false
     if ($result) {
