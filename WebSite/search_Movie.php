@@ -61,20 +61,7 @@ Update_Search_hits($title, $rating, $genre, $year);
     <title>Search Movies</title>
 </head>
 <body> 
-<div id="data-body" class="row">
-    <nav id="data-nav-bar" class="col-lg-2 bg-info">
-        <h2 class="text-center">Page Links</h2>
-        <h2 class="text-center">ACME</h2>
-        <ul class="nav nav-pills nav-stacked">
-            <li><a href="search_Movie.php">Search Movies</a></li>
-            <li><a href="top_Searched.php">Top 10 Searched Movies</a></li>
-            <li><a href="top_Rated.php">Top 10 Rated Movies</a></li>
-            <li><a href="userSignUp.php">User Signup</a></li>
-            <li><a href="showUsers.php">View All Users</a></li>
-            <li><a href="adminLogIn.php">Administrator Section</a></li>
-        </ul> 
-    </nav>
-       
+<div id="data-body">       
     <main class="col-lg-10">
         <h1>Search for Movies</h1>
         <form action="<?php echo htmlspecialchars(
