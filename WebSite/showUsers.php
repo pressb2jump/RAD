@@ -46,7 +46,7 @@ $result = Show_user($userEmail);
 </head>
 <body> 
 <div id="data-body">
-    <main class="col-lg-10">
+    <main class="col-lg-12">
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" 
         method="post">
     <div class="form-group">

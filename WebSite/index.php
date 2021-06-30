@@ -37,10 +37,23 @@ require 'header.php';
     <link rel="stylesheet" type="text/css" href="StyleSheet.css" />
     <title>Search Movies</title>
 </head>
-<body> 
+<body id="index-body"> 
 <div id="data-body">       
     <main class="col-lg-10">
         <a href="search_Movie.php">Search For Movies</a>
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" 
+        method="post">
+        <button class="col-1g-14">
+            <type="submit" name="btnNextPage" id="btnNextPage"
+                class="btn btn-default">Search For Movies!</button>
+        </form>
+        <?php
+            // if (isset($_POST["btnNextPage"])) {  
+            //     header('Location: search_Movie.php');
+            //     exit;
+            // }
+        ?>
+         
     </main>
 </div>
 </body>

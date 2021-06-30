@@ -73,7 +73,7 @@ while ($movies = mysqli_fetch_assoc($movies_set)) {
 </head>
 <body>
 <div id="data-body" aria-label="Top 10 Searched Movies">      
-    <main class="col-lg-20">
+    <main class="col-lg-12">
         <h1>Top 10 most Searched Movies</h1>
         <div id="chartContainer" style="height: 370px; width: 80%;" 
         aria-label="Chart" role="img"></div>

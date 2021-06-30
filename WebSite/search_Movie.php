@@ -21,8 +21,8 @@
  * @since      File available since Release 1.2.0
  * @deprecated File deprecated in Release 2.0.0
  */
-?>
-<?php
+ ?>
+ <?php
 require 'header.php';
 $closeBracket ="&#039) ";
 $andGenre = "AND `Genre` IN (&#039";
@@ -62,7 +62,7 @@ Update_Search_hits($title, $rating, $genre, $year);
 </head>
 <body> 
 <div id="data-body">       
-    <main class="col-lg-10">
+    <main class="col-lg-12">
         <h1>Search for Movies</h1>
         <form action="<?php echo htmlspecialchars(
             $_SERVER["PHP_SELF"]

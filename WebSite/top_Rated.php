@@ -89,7 +89,7 @@ if (array_diff($current_results, $last_results) != null) {//different
 </head>
 <body>
 <div id="data-body">
-    <main class="col-lg-20">
+    <main class="col-lg-12">
         <h1>Top 10 Rated Movies</h1>
         <form action="<?php echo htmlspecialchars(
             $_SERVER["PHP_SELF"]

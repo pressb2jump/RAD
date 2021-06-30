@@ -25,6 +25,7 @@
 <header>
   <!-- Navbar -->
   <div class="topnav">
+        <a href="index.php">ACME</a>
         <a href="search_Movie.php">Search Movies</a>
         <a href="top_Searched.php">Top 10 Searched Movies</a>
         <a href="top_Rated.php">Top 10 Rated Movies</a>

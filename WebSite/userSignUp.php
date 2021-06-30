@@ -43,7 +43,7 @@ $emailCheck = User_Check();
 </head>
 <body> 
 <div id="data-body">
-    <main class="col-lg-10">
+    <main class="col-lg-12">
         <h1>User Signup</h1>
         <form action="<?php echo htmlspecialchars(
             $_SERVER["PHP_SELF"]
