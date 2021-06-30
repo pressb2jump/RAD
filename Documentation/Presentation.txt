@@ -1,0 +1,31 @@
+Presentation
+We have to Explain Each page. Explain accessablity and how each page works.
+
+Introduction - Bayley
+
+Home/Index page - Kyle
+
+Search Page - Bayley
+Top 10 searches - Bayley
+
+More Info page- Kyle
+(Show rating a Movie- Rate It 100)
+
+Top Rated page- Bayley
+
+User Signup and Unsubscribing - Bayley 
+
+Admin Sign in- Kyle
+(Use Admin1 and Password1!)
+
+Delete User- Kyle
+
+Questions and Wrap up - Both
+
+
+
+
+
+
+
+
