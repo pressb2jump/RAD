@@ -22,8 +22,6 @@
  * @deprecated File deprecated in Release 2.0.0
  */
 
-require 'header.php';
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,24 +33,25 @@ require 'header.php';
     <link rel="stylesheet" 
     href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="StyleSheet.css" />
+    <script src="textAnimation.js" defer></script>
+
     <title>Search Movies</title>
 </head>
 <body id="index-body"> 
 <div id="data-body">       
     <main class="col-lg-10">
-        <a href="search_Movie.php">Search For Movies</a>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" 
-        method="post">
-        <button class="col-1g-14">
-            <type="submit" name="btnNextPage" id="btnNextPage"
-                class="btn btn-default">Search For Movies!</button>
-        </form>
-        <?php
-            // if (isset($_POST["btnNextPage"])) {  
-            //     header('Location: search_Movie.php');
-            //     exit;
-            // }
-        ?>
+        <a id="title" href="search_Movie.php">Search For Movies</a>
+       
+
+        <h1 class="ml1">
+            <span class="text-wrapper">
+                <span class="line line1"></span>
+                <span class="letters">ACME Entertainment pty. ltd.</span>
+                <span class="line line2"></span>
+            </span>
+        </h1>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+
          
     </main>
 </div>
