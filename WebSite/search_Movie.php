@@ -140,7 +140,7 @@ Update_Search_hits($title, $rating, $genre, $year);
                 <td><?php echo $movies['Rating']; ?></td>
                 <td><?php echo $movies['Year']; ?></td>
                 <td><?php echo $movies['Genre']; ?></td>
-                <td><a href='moreInfo.php?id=<?php echo $movies['ID'] ?>'>More</a></td>
+                <td><a id="MoreText" href='moreInfo.php?id=<?php echo $movies['ID'] ?>'>More</a></td>
             </tr>
         <?php } ?>
     </table>

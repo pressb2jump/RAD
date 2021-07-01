@@ -15,10 +15,10 @@ h1
     text-align: center;
 }
 h2 {
-    color: white;
+    color: black;
 }
 a {
-    color: white;
+    color: black;
 }
 
 .button {
@@ -71,15 +71,6 @@ a {
     background-color: whitesmoke;
     min-height: 100%;
     min-width: 100%;
-}
-
-
-#banner h1 
-{
-    font-size: 18px;
-    padding: 10px 10px 0px 10px;
-    margin: 0px;
-    text-align: center;
 }
 
 /* Table Designs */
@@ -182,13 +173,9 @@ color: white;
     position: center;
     left: 30px;
 }
-#data-nav-bar a
-{
-    background: #333;
-}
 
 #index-body {
-    background: #9ba5b5;
+    background:linear-gradient(to right, #778899, #959595);
 }
 
 #title {
@@ -207,7 +194,7 @@ color: white;
   .ml1 .letter {
     display: inline-block;
     line-height: 1em;
-    color: white;
+    color: black;
   }
   
   .ml1 .text-wrapper {
@@ -230,3 +217,7 @@ color: white;
   
   .ml1 .line1 { top: 0; }
   .ml1 .line2 { bottom: 0; }
+
+  #moreText {
+      color: #aa1e00;
+  }

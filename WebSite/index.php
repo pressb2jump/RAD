@@ -35,24 +35,26 @@
     <link rel="stylesheet" type="text/css" href="StyleSheet.css" />
     <script src="textAnimation.js" defer></script>
 
-    <title>Search Movies</title>
+    <title>Home</title>
 </head>
 <body id="index-body"> 
 <div id="data-body">       
-    <main class="col-lg-10">
-        <a id="title" href="search_Movie.php">Search For Movies</a>
-       
-
+    <main class="col-lg-12">
         <h1 class="ml1">
             <span class="text-wrapper">
                 <span class="line line1"></span>
-                <span class="letters">ACME Entertainment pty. ltd.</span>
+                <span class="letters">ACME Entertainment Pty Ltd</span>
                 <span class="line line2"></span>
             </span>
         </h1>
+        <div class="col-1g-12">
+            <div class="col-xs-4"></div>
+                <div class="col-xs-6">
+                    <a id="title" href="search_Movie.php">Search For Movies</a>
+                </div>
+            <div class="col-xs-6"></div>
+        </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
-
-         
     </main>
 </div>
 </body>
