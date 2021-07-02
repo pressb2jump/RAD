@@ -39,7 +39,7 @@
 </head>
 <body id="index-body"> 
 <div id="data-body">       
-    <main class="col-lg-12">
+    <main class="col-1g-12">
         <h1 class="ml1">
             <span class="text-wrapper">
                 <span class="line line1"></span>
@@ -49,7 +49,7 @@
         </h1>
         <div class="col-1g-12">
             <div class="col-xs-4"></div>
-                <div class="col-xs-6">
+                <div class="col-xs-8">
                     <a id="title" href="search_Movie.php">Search For Movies</a>
                 </div>
             <div class="col-xs-6"></div>

@@ -69,7 +69,7 @@ Update_Search_hits($title, $rating, $genre, $year);
         ); 
 ?>" method="post">
             <div class="form-group">
-                <label for="title">Title:</label>
+                <label for="title">Title: </label>
                 <input type="text" class="form-control" id="title" 
                 name="title" pattern= "[0-9a-zA-Z\-(): '/&,.*?]*|^$">
             </div>

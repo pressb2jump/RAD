@@ -46,8 +46,7 @@
 </head>
 <body> 
 <div id="data-body">       
-    <main class="col-lg-10">
-        <h1><?php echo $movies['Title']; ?></h1>
+    <main class="col-lg-12">
         <table>
         <?php echo "
             <tr>

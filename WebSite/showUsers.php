@@ -89,7 +89,7 @@ $result = Show_user($userEmail);
                             <td>".$firstName."</td>
                             <td>".$lastName."</td>
                             <td>".$email."</td>
-                            <td><a href='deleteUser.php?id=$userID'>Delete</a></td>
+                            <td><a id=deleteLink href='deleteUser.php?id=$userID'>Delete</a></td>
                         </tr>";
             }
                 echo "</table>";

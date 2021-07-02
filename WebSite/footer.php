@@ -24,10 +24,10 @@
 ?>
 <footer>
   <!-- Copyright -->
-  <div id="data-footer" class="text-center text-dark p-3">
+  <div id="data-footer" class="text-center p-3">
     © 2021 Copyright:
-    <a id="copyrightCredit" class="text-dark">Bayley Wise M201796@Tafe.wa.edu.au</a>
-    <a id="copyrightCredit" class="text-dark">Kyle Chamberlain P454666@Tafe.wa.edu.au</a>
+    <label>Bayley Wise M201796@Tafe.wa.edu.au , </label>
+    <label>Kyle Chamberlain P454666@Tafe.wa.edu.au</label>
   </div>
   <!-- Copyright -->
 </footer>
